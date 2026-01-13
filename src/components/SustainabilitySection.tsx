@@ -1,3 +1,6 @@
+"use client"
+import {motion} from "motion/react"
+
 export default function SustainabilitySection() {
   return (
     <section className="relative py-16 lg:py-24 bg-gray-50 overflow-hidden">

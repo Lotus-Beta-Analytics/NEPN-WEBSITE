@@ -37,7 +37,7 @@ export default function FAQSection() {
 
   return (
     <section className="py-16 lg:py-24 bg-white">
-      <div className="px-12 flex flex-row justify-between">
+      <div className="px-12 flex flex-row justify-between place-items-center">
         <h2 className="text-5xl lg:text-[90px] font-semibold text-black leading-tight mb-8">
           General Questions
         </h2>
