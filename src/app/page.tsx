@@ -1,14 +1,15 @@
-import Header from '@/components/Header'
-import Hero from '@/components/Hero'
-import AboutSection from '@/components/AboutSection'
-import ValuesSection from '@/components/ValuesSection'
-import SustainabilitySection from '@/components/SustainabilitySection'
-import CTABanner from '@/components/CTABanner'
-import TestimonialsSection from '@/components/TestimonialsSection'
-import FAQSection from '@/components/FAQSection'
-import ContactCTA from '@/components/ContactCTA'
-import NewsSection from '@/components/NewsSection'
-import Footer from '@/components/Footer'
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import AboutSection from "@/components/AboutSection";
+import ValuesSection from "@/components/ValuesSection";
+import SustainabilitySection from "@/components/SustainabilitySection";
+import CTABanner from "@/components/CTABanner";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import FAQSection from "@/components/FAQSection";
+import ContactCTA from "@/components/ContactCTA";
+import NewsSection from "@/components/NewsSection";
+import Footer from "@/components/Footer";
+import CounterSection from "@/components/Counter";
 
 export default function Home() {
   return (
@@ -22,8 +23,10 @@ export default function Home() {
       <TestimonialsSection />
       <FAQSection />
       <ContactCTA />
+      <CounterSection />
       <NewsSection />
+
       <Footer />
     </main>
-  )
+  );
 }

@@ -1,10 +1,10 @@
 export default function CTABanner() {
   return (
-    <section className="relative h-[500px] lg:h-[600px] w-full overflow-hidden">
+    <section className="relative px-12 h-[500px] lg:h-[600px] w-full overflow-hidden">
       {/* Background Image with Gradient */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/cta-bg.jpg)' }}
+        style={{ backgroundImage: "url(/images/cta-bg.jpg)" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900/80 to-transparent" />
       </div>
@@ -16,7 +16,8 @@ export default function CTABanner() {
             Network E&P Nigeria Limited (NEPN)
           </p>
           <h2 className="text-4xl lg:text-6xl font-medium text-white mb-8 leading-tight">
-            The Leading indigenous<br />
+            The Leading indigenous
+            <br />
             oil and gas player
           </h2>
           <button className="bg-nepn-brightBlue hover:bg-nepn-blue text-white px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl">
@@ -25,5 +26,5 @@ export default function CTABanner() {
         </div>
       </div>
     </section>
-  )
+  );
 }
