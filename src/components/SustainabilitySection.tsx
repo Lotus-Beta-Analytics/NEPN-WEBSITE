@@ -1,16 +1,27 @@
-"use client"
-import {motion} from "motion/react"
+"use client";
+import { motion } from "motion/react";
 
 export default function SustainabilitySection() {
   return (
     <section className="relative py-16 lg:py-24 bg-gray-50 overflow-hidden">
-      <div className="absolute top-1/2 left-[-20] -translate-x-1/2 -translate-y-1/2 z-0">
+      <motion.div
+        // style={ball}
+        className="absolute top-1 left-[-500px] -translate-x-1/2 -translate-y-1/2 z-0"
+        initial={{ opacity: 0, scale: 0.5 }}
+        // animate={}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 1,
+          delay: 1,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+      >
         {/* Outer Circle */}
         <div className="w-[840px] h-[840px] rounded-full bg-[#2828280A] border-[#2828280A]"></div>
 
         {/* Inner Circle */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[640px] h-[640px] rounded-full border-[#2828280A]"></div>
-      </div>
+      </motion.div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Badge with O shape behind */}

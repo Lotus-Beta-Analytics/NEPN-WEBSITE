@@ -5,10 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Who we are", href: "/who-we-are" },
+  { name: "Who we are", href: "/about" },
   { name: "Sustainability", href: "/sustainability" },
   { name: "Operations", href: "/operations" },
   { name: "Partners", href: "/partners" },
@@ -30,6 +31,8 @@ export default function Header() {
       document.body.style.overflow = "unset";
     };
   }, [isMenuOpen]);
+
+  const pathName = usePathname();
 
   return (
     <header className="w-full bg-white sticky top-0 z-50 border-b border-gray-100">
@@ -153,55 +156,21 @@ export default function Header() {
               <nav className="flex-1 overflow-y-auto">
                 <div className="p-8 lg:p-12 space-y-6 lg:space-y-8">
                   {/* Links */}
-                  <Link
-                    href="/"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-xl lg:text-2xl xl:text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors leading-tight"
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/who-we-are"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight"
-                  >
-                    About Us
-                  </Link>
-                  <Link
-                    href="/sustainability"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight"
-                  >
-                    Sustainability
-                  </Link>
-                  <Link
-                    href="/operations"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight"
-                  >
-                    Operations
-                  </Link>
-                  <Link
-                    href="/news"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight"
-                  >
-                    News
-                  </Link>
-                  <Link
-                    href="/partners"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight"
-                  >
-                    Partners
-                  </Link>
-                  <Link
-                    href="/contact"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight"
-                  >
-                    Contact Us
-                  </Link>
+                  {navLinks.map((item, index) => {
+                    const isActive = pathName === item.href;
+                    return (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`block text-xl lg:text-2xl xl:text-3xl font-bold text-gray-600 hover:text-blue-700 transition-colors leading-tight ${
+                          isActive ? "text-blue-700" : "text-gray-600"
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    );
+                  })}
                 </div>
               </nav>
             </motion.div>
