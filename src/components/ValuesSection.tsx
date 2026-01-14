@@ -101,7 +101,7 @@ export default function ValuesSection() {
               className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg"
             >
               <p className="text-nepn-navy font-semibold text-sm md:text-base">
-                Building Nigeria's Energy Future
+                Building Nigeria&apos;s Energy Future
               </p>
             </motion.div>
           </motion.div>

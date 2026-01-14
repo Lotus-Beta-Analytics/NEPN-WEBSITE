@@ -31,7 +31,7 @@ export default function Footer() {
             />
             <p className="text-white/60 text-[15px] leading-relaxed mb-6">
               A leading indigenous oil and gas company, established in 2001. We
-              are dedicated to responsibly harnessing Nigeria's energy
+              are dedicated to responsibly harnessing Nigeria&apos;s energy
               resources, with a proven track record in exploring and developing
               the Qua Iboe field in OML 13.
             </p>
