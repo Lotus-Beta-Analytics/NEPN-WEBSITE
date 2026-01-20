@@ -18,8 +18,8 @@ export default function AboutSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-12"
           >
-            <div className="px-8 py-3 relative z-10">
-              <span className="relative text-gray-700 text-xl lg:text-2xl font-semibold">
+            <div className="px-4 py-3 relative z-10">
+              <span className="relative text-white text-xl lg:text-2xl font-semibold">
                 <span className="relative z-10">Wh</span>
                 <span className="relative z-10">o we are</span>
 
@@ -28,7 +28,7 @@ export default function AboutSection() {
                   initial={{ scale: 0 }}
                   animate={isInView ? { scale: 1 } : { scale: 0 }}
                   transition={{ duration: 0.5, delay: 0.3, ease: "backOut" }}
-                  className="absolute -left-3 top-[-10px] -translate-y-1/2 w-14 h-14 rounded-full bg-[#e4dddd] z-0"
+                  className="absolute -left-3 top-[-10px] -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 z-0"
                 />
               </span>
             </div>

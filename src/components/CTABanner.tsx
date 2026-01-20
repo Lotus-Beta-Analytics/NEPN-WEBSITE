@@ -1,4 +1,13 @@
+"use client";
+
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
+
 export default function CTABanner() {
+  const ref = useRef(null);
+
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
   return (
     <section className="relative px-12 h-[500px] lg:h-[600px] w-full overflow-hidden">
       {/* Background Image with Gradient */}
@@ -11,7 +20,13 @@ export default function CTABanner() {
 
       {/* Content */}
       <div className="relative h-full container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
-        <div className="max-w-3xl">
+        <motion.div
+          ref={ref}
+          className="max-w-3xl"
+          initial={{ scale: 0 }}
+          animate={isInView ? { scale: 1 } : { scale: 0 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: "backOut" }}
+        >
           <p className="text-white text-base lg:text-lg font-medium mb-4">
             Network E&P Nigeria Limited (NEPN)
           </p>
@@ -21,9 +36,9 @@ export default function CTABanner() {
             oil and gas player
           </h2>
           <button className="bg-nepn-brightBlue hover:bg-nepn-blue text-white px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl">
-            CONTAC US TODAY
+            CONTACT US TODAY
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

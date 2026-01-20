@@ -2,11 +2,35 @@
 
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { Play, Pause } from "lucide-react";
 
-export default function ValuesSection() {
+interface ValuesSectionProps {
+  mediaType?: "image" | "video";
+  mediaSrc?: string;
+  posterImage?: string;
+}
+
+export default function ValuesSection({
+  mediaType = "image",
+  mediaSrc = "/images/worker-nepn.jpg",
+  posterImage = "/images/worker-nepn.jpg",
+}: ValuesSectionProps) {
   const ref = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -74,20 +98,56 @@ export default function ValuesSection() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Image */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+          {/* Media Container */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-            className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl group"
+            className="relative h-[400px] md:h-[500px] lg:h-full min-h-[600px] rounded-2xl overflow-hidden shadow-2xl group"
           >
-            <Image
-              src="/images/worker-nepn.jpg"
-              alt="NEPN Worker at facility"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+            {mediaType === "video" ? (
+              <>
+                <video
+                  ref={videoRef}
+                  src={mediaSrc}
+                  poster={posterImage}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loop
+                  playsInline
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
+                />
+
+                {/* Play/Pause Button */}
+                <motion.button
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={
+                    isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }
+                  }
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={togglePlay}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors z-10 group-hover:scale-110"
+                  aria-label={isPlaying ? "Pause video" : "Play video"}
+                >
+                  {isPlaying ? (
+                    <Pause className="w-8 h-8 md:w-10 md:h-10 text-[#0000FE]" fill="currentColor" />
+                  ) : (
+                    <Play className="w-8 h-8 md:w-10 md:h-10 text-[#0000FE] ml-1" fill="currentColor" />
+                  )}
+                </motion.button>
+              </>
+            ) : (
+              <Image
+                src={mediaSrc}
+                alt="NEPN Worker at facility"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            )}
+
             {/* Overlay gradient for depth */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
@@ -106,12 +166,12 @@ export default function ValuesSection() {
             </motion.div>
           </motion.div>
 
-          {/* Cards Column */}
+          {/* Cards Column - Matches height */}
           <motion.div
             variants={staggerCards}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-5"
+            className="flex flex-col justify-between gap-4 md:gap-5"
           >
             {values.map((value, index) => (
               <motion.div
@@ -126,7 +186,7 @@ export default function ValuesSection() {
                   stiffness: 300,
                   damping: 20,
                 }}
-                className="bg-white rounded-xl p-5 md:p-6 shadow-md hover:shadow-2xl transition-shadow duration-300 flex items-start gap-4 md:gap-5 border border-gray-100 group"
+                className="bg-white rounded-xl p-5 md:p-6 shadow-md hover:shadow-2xl transition-shadow duration-300 flex items-start gap-4 md:gap-5 border border-gray-100 group flex-1"
               >
                 {/* Letter Badge */}
                 <motion.div

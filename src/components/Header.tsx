@@ -1,182 +1,161 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Who we are", href: "/about" },
-  { name: "Sustainability", href: "/sustainability" },
-  { name: "Operations", href: "/operations" },
-  { name: "Partners", href: "/partners" },
-  { name: "News & Insights", href: "/news" },
-  { name: "Contact us", href: "/contact" },
-];
+interface NavigationProps {
+  currentPage: string;
+  onNavigate: (page: string) => void;
+}
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isMenuOpen]);
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const pathName = usePathname();
+  const menuItems = [
+    { id: "/", label: "Home" },
+    { id: "/about", label: "About Us" },
+    { id: "/sustainability", label: "Sustainability" },
+    { id: "/operations", label: "Operations" },
+    { id: "/news", label: "News" },
+    { id: "/partners", label: "Partners" },
+    { id: "/contact", label: "Contact Us" },
+  ];
+
+  const handleNavigate = (page: string) => {
+    router.push(page);
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <header className="w-full bg-white sticky top-0 z-50 border-b border-gray-100">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 lg:h-[72px]">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/">
-              <Image
-                src="/images/logo.png"
-                alt="NEPN Logo"
-                width={167}
-                height={56}
-                className="h-12 lg:h-14 w-auto"
+    <>
+      {/* Navigation Bar */}
+      <motion.div
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className="fixed top-0 left-0 right-0 bg-white h-[70px] sm:h-[84px] z-50 shadow-md overflow-hidden"
+      >
+        <div className="container mx-auto px-8 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+          <motion.div whileHover={{ scale: 1.05 }} className="cursor-pointer">
+            <div className="flex-shrink-0">
+              <Link href="/">
+                <Image
+                  src="/images/logo.png"
+                  alt="NEPN Logo"
+                  width={167}
+                  height={56}
+                  className="h-10 sm:h-12 lg:h-14 w-auto"
+                />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Menu Button */}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsMenuOpen(true)}
+            className="size-[40px] sm:size-[48px] flex items-center justify-center"
+            aria-label="Open menu"
+          >
+            <svg
+              className="w-[24px] h-[24px] sm:w-[29px] sm:h-[29px]"
+              fill="none"
+              viewBox="0 0 29 29"
+            >
+              <path
+                d="M3.625 7.25h21.75M3.625 14.5h21.75M3.625 21.75h21.75"
+                stroke="black"
+                strokeWidth="2.5"
+                strokeLinecap="round"
               />
-            </Link>
-          </div>
-
-          {/* Desktop - Watch Video Button and Menu */}
-          <div className="hidden lg:flex items-center gap-4">
-            <button className="bg-[#0000FE] hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg flex items-center gap-2">
-              <span>WATCH VIDEO</span>
-            </button>
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="block h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile menu button and Watch Video button */}
-          <div className="lg:hidden flex items-center gap-4">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2">
-              <span>WATCH VIDEO</span>
-              <svg
-                width="16"
-                height="10"
-                viewBox="0 0 22 14"
-                fill="none"
-                className="w-4 h-2.5"
-              >
-                <path d="M0 0L22 7L0 14V0Z" fill="currentColor" />
-              </svg>
-            </button>
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="block h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
+            </svg>
+          </motion.button>
         </div>
-      </nav>
+      </motion.div>
 
-      {/* Navigation Menu Overlay - 1/3 of page */}
+      {/* Full Screen Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop with Blur */}
             <motion.div
-              onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="fixed inset-0 bg-black/30 backdrop-blur-md z-[99]"
             />
 
-            {/* Menu Panel - Slide from right */}
+            {/* Menu Panel */}
             <motion.div
-              className="fixed top-0 right-0 h-screen w-full sm:w-2/3 lg:w-1/3 bg-white z-50 shadow-2xl flex flex-col"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "tween", duration: 0.7 }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="fixed right-0 top-0 bg-white z-[100] w-full sm:w-[80vw] md:w-[40vw] lg:w-[40vw] h-full flex items-center justify-center sm:justify-end px-6 sm:pr-12 md:pr-16 lg:pr-20 overflow-y-auto"
             >
-              {/* Header */}
-              <div className="flex-shrink-0 flex justify-between items-center py-6 px-12 border-b border-gray-200">
-                <h2 className="text-sm font-semibold text-gray-600 tracking-wider">
-                  NAVIGATION MENU
-                </h2>
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                  aria-label="Close menu"
-                >
-                  <X size={24} className="text-gray-600" />
-                </button>
-              </div>
+              {/* Close Button */}
+              <motion.button
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsMenuOpen(false)}
+                className="absolute top-6 sm:top-8 right-6 sm:right-8 size-10 sm:size-12 flex items-center justify-center"
+                aria-label="Close menu"
+              >
+                <X className="w-6 h-6 sm:w-8 sm:h-8 text-black" />
+              </motion.button>
 
-              {/* Navigation Content */}
-              <nav className="flex-1 overflow-y-auto">
-                <div className="p-8 lg:p-12 space-y-6 lg:space-y-8">
-                  {/* Links */}
-                  {navLinks.map((item, index) => {
-                    const isActive = pathName === item.href;
-                    return (
-                      <Link
-                        key={index}
-                        href={item.href}
-                        onClick={() => setIsMenuOpen(false)}
-                        className={`block text-xl lg:text-2xl xl:text-3xl font-bold text-gray-600 hover:text-blue-700 transition-colors leading-tight ${
-                          isActive ? "text-blue-700" : "text-gray-600"
-                        }`}
-                      >
-                        {item.name}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </nav>
+              {/* Menu Items */}
+              <div className="text-center sm:text-right w-full max-w-lg">
+                <motion.p
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  className="text-xs sm:text-sm text-gray-500 mb-8 sm:mb-12 tracking-wider"
+                >
+                  NAVIGATION MENU
+                </motion.p>
+
+                <nav className="space-y-4 sm:space-y-6">
+                  {menuItems.map((item, index) => (
+                    <motion.button
+                      key={item.id}
+                      initial={{ x: 50, opacity: 0 }}
+                      animate={{
+                        x: 0,
+                        opacity: 1,
+                        transition: { delay: index * 0.1 },
+                      }}
+                      whileHover={{
+                        x: -10,
+                        transition: { duration: 0.2 },
+                      }}
+                      onClick={() => handleNavigate(item.id)}
+                      className={`block px-8 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold transition-colors ${
+                        pathname === item.id
+                          ? "text-[#0000fe]"
+                          : "text-black hover:text-[#0000fe]"
+                      }`}
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </nav>
+              </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer className="relative bg-gray-900 text-gray-400">
-      <div className="absolute top-[-120px] left-0 right-0 z-10">
+      <div className="absolute top-[-160px] left-0 right-0 z-10">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
@@ -13,12 +13,13 @@ export default function Footer() {
         >
           <path
             fill="#111827"
-            d="M0,224L48,208C96,192,192,160,288,144C384,128,480,128,576,128C672,128,768,128,864,149.3C960,171,1056,213,1152,218.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          />
+            fill-opacity="1"
+            d="M0,128L80,106.7C160,85,320,43,480,53.3C640,64,800,128,960,138.7C1120,149,1280,107,1360,85.3L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+          ></path>
         </svg>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-32 lg:pb-20 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-32 lg:pb-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Company Info */}
           <div className="lg:col-span-4">

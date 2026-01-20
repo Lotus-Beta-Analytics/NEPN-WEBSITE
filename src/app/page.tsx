@@ -17,7 +17,7 @@ export default function Home() {
       <Header />
       <Hero />
       <AboutSection />
-      <ValuesSection />
+      <ValuesSection mediaSrc="/videos/bg-video.mp4" mediaType="video" />
       <SustainabilitySection />
       <CTABanner />
       <TestimonialsSection />
@@ -25,7 +25,6 @@ export default function Home() {
       <ContactCTA />
       <CounterSection />
       <NewsSection />
-
       <Footer />
     </main>
   );

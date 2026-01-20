@@ -6,8 +6,8 @@ const heroSlides = [
     title: "Powering Progress through\nExploration",
     description:
       "At NEPN, we discover and harness energy responsibly to fuel economies and empower communities",
-    mediaType: "video", // Can be 'image', 'video', or 'blank'
-    mediaSrc: "/videos/bg-video.mp4", // Your image path
+    mediaType: "video",
+    mediaSrc: "/videos/bg-video.mp4",
   },
   {
     title: "Leading Indigenous\nOil & Gas Player",
@@ -28,7 +28,6 @@ const heroSlides = [
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Auto-scroll functionality
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -36,8 +35,6 @@ export default function Hero() {
 
     return () => clearInterval(interval);
   }, []);
-
-  const currentMedia = heroSlides[currentSlide];
 
   return (
     <section className="relative h-[600px] lg:h-[700px] w-full overflow-hidden">
@@ -82,7 +79,6 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Content */}
       <div className="relative h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl w-full">
           {/* More Transparent Glass Card with better text contrast */}
@@ -97,7 +93,6 @@ export default function Hero() {
               EXPLORE NOW
             </button>
 
-            {/* Pagination Dots with progress */}
             <div className="flex items-center justify-center gap-2 mt-8">
               {heroSlides.map((_, index) => (
                 <button
@@ -116,11 +111,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Navigation Arrows */}
       <button
         onClick={() =>
           setCurrentSlide(
-            (prev) => (prev - 1 + heroSlides.length) % heroSlides.length
+            (prev) => (prev - 1 + heroSlides.length) % heroSlides.length,
           )
         }
         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all z-10"
@@ -162,21 +156,20 @@ export default function Hero() {
         </svg>
       </button>
 
-      {/* Wave Decoration */}
-         <div className="absolute bottom-0 left-0 right-0 z-10">
-          <svg
-            viewBox="0 0 1440 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[40px]"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0 0C360 80 720 80 1080 40C1260 20 1350 0 1440 0V100H0V0Z"
-              fill="#ffffff"
-            />
-          </svg>
-        </div>
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <svg
+          viewBox="0 0 1440 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-[40px]"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 0C360 80 720 80 1080 40C1260 20 1350 0 1440 0V100H0V0Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </div>
     </section>
   );
 }

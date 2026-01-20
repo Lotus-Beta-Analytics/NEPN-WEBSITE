@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "motion/react";
 import Image from "next/image";
 
 const testimonials = [
@@ -27,7 +28,7 @@ const testimonials = [
   },
   {
     quote:
-      "NEPN’s professionalism and integrity make them a trusted partner in every project we undertake.",
+      "NEPN's professionalism and integrity make them a trusted partner in every project we undertake.",
     name: "Ngozi Adebayo",
     role: "Project Coordinator",
     image: "/images/testimonial-faitma.jpg",
@@ -36,6 +37,8 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   // Auto switch every 5 seconds
   useEffect(() => {
@@ -52,11 +55,11 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <section className="relative bg-gray-50 px-12">
+    <section ref={ref} className="relative bg-gray-50 px-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:flex lg:gap-8 items-start">
           {/* Left Column: Header + Dots + Carousel */}
-          <div className="lg:flex-1 flex flex-col gap-8 py-24">
+          <div className="lg:flex-1 flex flex-col gap-8 pt-8">
             {/* Header + Pagination */}
             <div className="flex flex-col items-start gap-4">
               <div className="py-3 relative z-10">
@@ -84,7 +87,7 @@ export default function TestimonialsSection() {
                       }`}
                       aria-label={`Go to testimonial slide ${slideIndex + 1}`}
                     />
-                  )
+                  ),
                 )}
               </div>
             </div>
@@ -92,9 +95,12 @@ export default function TestimonialsSection() {
             {/* Carousel */}
             <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
               {visibleTestimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-[10px] p-8 shadow-md flex flex-col justify-between transition-transform duration-500"
+                <motion.div
+                  key={`${currentIndex}-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white rounded-[10px] p-8 shadow-md flex flex-col justify-between"
                 >
                   {/* Quote Icon */}
                   <div className="mb-6">
@@ -130,41 +136,103 @@ export default function TestimonialsSection() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Right Column: Stats Card (full height of left) */}
-          <div className="lg:w-[300px] bg-nepn-red  h-[620px] border-2 border-y-500  text-center shadow-xl text-white flex flex-col justify-between py-4 mt-8 lg:mt-0">
-            <div className="mb-6 flex flex-col place-items-center">
-              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center">
-                <Image
-                  src={"/images/mdi_partnership.png"}
-                  width={20}
-                  height={20}
-                  alt="logo"
-                />
+          {/* Right Column: Stats Card with Flag Drop Animation */}
+          <div className="hidden lg:block relative mt-8 lg:mt-0 h-[620px] lg:w-[300px]">
+            {/* Stats Card (Flag) */}
+            <motion.div
+              initial={{ y: -650, opacity: 0 }}
+              animate={
+                isInView ? { y: 0, opacity: 1 } : { y: -650, opacity: 0 }
+              }
+              transition={{
+                type: "spring",
+                damping: 15,
+                stiffness: 80,
+                mass: 1.2,
+                delay: 0.3,
+              }}
+              className="w-full bg-nepn-red h-[620px] border-2 border-y-500 text-center shadow-xl text-white flex flex-col justify-between py-4 relative"
+            >
+              {/* Subtle wave effect */}
+              <motion.div
+                initial={{ scaleX: 1 }}
+                animate={
+                  isInView
+                    ? {
+                        scaleX: [1, 0.98, 1, 0.99, 1],
+                        skewY: [0, -1, 0, 0.5, 0],
+                      }
+                    : {}
+                }
+                transition={{
+                  duration: 2,
+                  delay: 1.2,
+                  ease: "easeInOut",
+                }}
+                className="absolute inset-0"
+              />
+
+              <div className="mb-6 flex flex-col place-items-center relative z-10">
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={
+                    isInView
+                      ? { scale: 1, rotate: 0 }
+                      : { scale: 0, rotate: -180 }
+                  }
+                  transition={{
+                    delay: 1,
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 200,
+                  }}
+                  className="w-20 h-20 bg-white rounded-full flex items-center justify-center"
+                >
+                  <Image
+                    src={"/images/mdi_partnership.png"}
+                    width={36}
+                    height={36}
+                    alt="logo"
+                  />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={
+                    isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                  }
+                  transition={{ delay: 1.3, duration: 0.5 }}
+                >
+                  <div className="text-5xl lg:text-6xl font-semibold mb-2">
+                    20+
+                  </div>
+                  <div className="text-base lg:text-lg font-medium mb-8">
+                    Partners
+                  </div>
+                </motion.div>
               </div>
 
-              <div>
-                <div className="text-5xl lg:text-6xl font-semibold mb-2">
-                  20+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={
+                  isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
+                }
+                transition={{ delay: 1.4, duration: 0.5 }}
+                className="space-y-1 text-start px-4 relative z-10"
+              >
+                <div className="text-5xl lg:text-5xl font-semibold tracking-wider">
+                  TESTI
                 </div>
-                <div className="text-base lg:text-lg font-medium mb-8">
-                  Partners
+                <div className="text-5xl lg:text-5xl font-semibold tracking-wider">
+                  MONIALS
                 </div>
-              </div>
-            </div>
-
-            <div className="space-y-1 text-start px-4">
-              <div className="text-5xl lg:text-5xl font-semibold tracking-wider">
-                TESTI
-              </div>
-              <div className="text-5xl lg:text-5xl font-semibold tracking-wider">
-                MONIALS
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -96,7 +96,7 @@ export default function NewsSection() {
   );
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-16 lg:py-24 bg-white mb-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left Side - Heading */}
