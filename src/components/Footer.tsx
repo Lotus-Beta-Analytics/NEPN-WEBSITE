@@ -13,7 +13,7 @@ export default function Footer() {
         >
           <path
             fill="#111827"
-            fill-opacity="1"
+            fillOpacity="1"
             d="M0,128L80,106.7C160,85,320,43,480,53.3C640,64,800,128,960,138.7C1120,149,1280,107,1360,85.3L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
           ></path>
         </svg>
@@ -32,7 +32,7 @@ export default function Footer() {
             />
             <p className="text-white/60 text-[15px] leading-relaxed mb-6">
               A leading indigenous oil and gas company, established in 2001. We
-              are dedicated to responsibly harnessing Nigeria's energy
+              are dedicated to responsibly harnessing Nigeria&apos;s energy
               resources, with a proven track record in exploring and developing
               the Qua Iboe field in OML 13.
             </p>

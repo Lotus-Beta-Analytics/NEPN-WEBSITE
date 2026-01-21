@@ -1,17 +1,18 @@
 "use client";
 import { motion, useInView } from "motion/react";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
 export default function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
+  const router = useRouter();
+
   return (
     <section ref={ref} className="relative bg-nepn-navy overflow-hidden px-12">
-      {/* Content Area - Added padding to account for waves */}
       <div className="relative z-10 pt-24 pb-32 lg:pt-32 lg:pb-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
@@ -76,7 +77,6 @@ export default function AboutSection() {
               ))}
             </div>
 
-            {/* Right - Description */}
             <div className="space-y-6">
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
@@ -107,6 +107,7 @@ export default function AboutSection() {
                 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-[#0000FE] hover:bg-nepn-blue text-white px-8 py-3 rounded-lg text-sm font-semibold transition-colors duration-200 shadow-lg"
+                onClick={() => router.push("/about")}
               >
                 READ MORE
               </motion.button>

@@ -287,7 +287,7 @@ export default function ContactPage() {
             >
               <h2 className="text-3xl font-bold mb-6 text-black">Visit Our Office</h2>
               <p className="text-gray-600 mb-8">
-                Find us at our head office in Abuja's Central Business District.
+                Find us at our head office in Abuja&apos;s Central Business District.
               </p>
 
               {/* Google Maps Embed */}

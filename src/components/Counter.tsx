@@ -12,19 +12,19 @@ const counterData = [
   },
   {
     icon: "/images/logoThree.png",
-    endValue: 500,
+    endValue: 20,
     title: "Dedicated Employees",
     suffix: "+",
   },
   {
     icon: "/images/logoFour.png",
-    endValue: 15,
+    endValue: 2,
     title: "Years of Excellence",
     suffix: "",
   },
   {
     icon: "/images/logoOne.png",
-    endValue: 50,
+    endValue: 46,
     title: "Strategic Partners",
     suffix: "+",
   },

@@ -12,9 +12,9 @@ interface ValuesSectionProps {
 }
 
 export default function ValuesSection({
-  mediaType = "image",
-  mediaSrc = "/images/worker-nepn.jpg",
-  posterImage = "/images/worker-nepn.jpg",
+  mediaType,
+  mediaSrc,
+  posterImage,
 }: ValuesSectionProps) {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -123,7 +123,9 @@ export default function ValuesSection({
                 <motion.button
                   initial={{ opacity: 0, scale: 0 }}
                   animate={
-                    isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }
+                    isInView
+                      ? { opacity: 1, scale: 1 }
+                      : { opacity: 0, scale: 0 }
                   }
                   transition={{ duration: 0.6, delay: 0.3 }}
                   whileHover={{ scale: 1.1 }}
@@ -133,9 +135,15 @@ export default function ValuesSection({
                   aria-label={isPlaying ? "Pause video" : "Play video"}
                 >
                   {isPlaying ? (
-                    <Pause className="w-8 h-8 md:w-10 md:h-10 text-[#0000FE]" fill="currentColor" />
+                    <Pause
+                      className="w-8 h-8 md:w-10 md:h-10 text-[#0000FE]"
+                      fill="currentColor"
+                    />
                   ) : (
-                    <Play className="w-8 h-8 md:w-10 md:h-10 text-[#0000FE] ml-1" fill="currentColor" />
+                    <Play
+                      className="w-8 h-8 md:w-10 md:h-10 text-[#0000FE] ml-1"
+                      fill="currentColor"
+                    />
                   )}
                 </motion.button>
               </>
@@ -161,7 +169,7 @@ export default function ValuesSection({
               className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg"
             >
               <p className="text-nepn-navy font-semibold text-sm md:text-base">
-                Building Nigeria's Energy Future
+                Building Nigeria&apos;s Energy Future
               </p>
             </motion.div>
           </motion.div>

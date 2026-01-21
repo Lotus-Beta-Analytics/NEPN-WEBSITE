@@ -17,7 +17,11 @@ export default function Home() {
       <Header />
       <Hero />
       <AboutSection />
-      <ValuesSection mediaSrc="/videos/bg-video.mp4" mediaType="video" />
+      <ValuesSection
+        mediaSrc="/videos/bg-video.mp4"
+        mediaType="video"
+        posterImage="/images/nepnI.webp"
+      />
       <SustainabilitySection />
       <CTABanner />
       <TestimonialsSection />

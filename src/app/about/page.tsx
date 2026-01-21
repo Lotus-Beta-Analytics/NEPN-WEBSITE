@@ -94,8 +94,8 @@ export default function About() {
           <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
             <p>
               Network E&P Nigeria Limited (NEPN) is a fully Nigerian-owned oil
-              and gas company at the forefront of the nation's energy sector.
-              Established with a vision to harness Nigeria's vast energy
+              and gas company at the forefront of the nation&apos;s energy sector.
+              Established with a vision to harness Nigeria&apos;s vast energy
               resources responsibly, we have grown to become a trusted name in
               exploration and production.
             </p>
@@ -297,7 +297,7 @@ export default function About() {
             </div>
             <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
             <p className="text-lg leading-relaxed">
-              To be Nigeria's leading indigenous energy company, delivering
+              To be Nigeria&apos;s leading indigenous energy company, delivering
               sustainable value through responsible exploration, production, and
               supply of oil and gas resources while prioritizing environmental
               stewardship, community development, and operational excellence.
@@ -315,7 +315,7 @@ export default function About() {
             </div>
             <h2 className="text-3xl font-bold mb-6">Our Vision</h2>
             <p className="text-lg leading-relaxed">
-              To power Nigeria's development through innovative and sustainable
+              To power Nigeria&apos;s development through innovative and sustainable
               energy solutions, setting the benchmark for excellence in the oil
               and gas industry while contributing to a cleaner, more prosperous
               future for all Nigerians.
