@@ -417,7 +417,7 @@ export default function Operations() {
             <h2 className="text-4xl font-bold mb-6">Visit Our Facilities</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Schedule a tour of our state-of-the-art operations and see
-              firsthand how we're powering Nigeria's future.
+              firsthand how we&apos;re powering Nigeria&apos;s future.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}

@@ -121,7 +121,7 @@ export default function ContactPage() {
               transition={{ delay: 0.4 }}
               className="text-xl max-w-2xl mx-auto"
             >
-              We're here to answer your questions and discuss opportunities
+              We&apos;re here to answer your questions and discuss opportunities
             </motion.p>
           </div>
         </div>

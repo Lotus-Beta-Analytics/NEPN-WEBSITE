@@ -6,9 +6,9 @@ import { useRef, useState } from "react";
 import { Play, Pause } from "lucide-react";
 
 interface ValuesSectionProps {
-  mediaType?: "image" | "video";
-  mediaSrc?: string;
-  posterImage?: string;
+  mediaType: "image" | "video";
+  mediaSrc: string;
+  posterImage: string;
 }
 
 export default function ValuesSection({

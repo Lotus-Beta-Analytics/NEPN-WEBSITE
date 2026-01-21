@@ -171,7 +171,7 @@ export default function PartnersPage() {
               className="text-xl max-w-3xl mx-auto"
             >
               Building strong alliances to drive innovation and sustainable
-              growth in Nigeria's energy sector
+              growth in Nigeria&apos;s energy sector
             </motion.p>
           </div>
         </div>
@@ -229,7 +229,7 @@ export default function PartnersPage() {
           >
             <h2 className="text-4xl font-bold mb-4 text-black">Why Partner with NEPN</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Strategic advantages of collaborating with Nigeria's leading
+              Strategic advantages of collaborating with Nigeria&apos;s leading
               indigenous energy company
             </p>
           </motion.div>
@@ -409,8 +409,8 @@ export default function PartnersPage() {
             </div>
             <h2 className="text-4xl font-bold mb-6">Become a Partner</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Join forces with NEPN to unlock new opportunities in Nigeria's
-              dynamic energy sector. Let's create value together.
+              Join forces with NEPN to unlock new opportunities in Nigeria&apos;s
+              dynamic energy sector. Let&apos;s create value together.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <motion.button

@@ -70,7 +70,7 @@ export default function About() {
             transition={{ delay: 0.4 }}
             className="text-xl max-w-2xl mx-auto"
           >
-            Leading Nigeria's energy sector with innovation, sustainability, and
+            Leading Nigeria&apos;s energy sector with innovation, sustainability, and
             commitment to excellence
           </motion.p>
         </div>
@@ -372,7 +372,7 @@ export default function About() {
           >
             <h2 className="text-4xl font-bold mb-6">Join Us on Our Journey</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Be part of Nigeria's energy transformation. Explore career
+              Be part of Nigeria&apos;s energy transformation. Explore career
               opportunities and partnership possibilities with NEPN.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
