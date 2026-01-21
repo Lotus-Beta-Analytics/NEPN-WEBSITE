@@ -79,8 +79,8 @@ export default function ContactCTA() {
             Get in touch
           </h2>
           <p className="text-lg lg:text-xl text-white leading-relaxed lg:leading-[40px] mb-12">
-            We'd love to hear from you. Reach out to our team for general
-            inquiries, or business opportunities — we're here to help.
+            We&apos;d love to hear from you. Reach out to our team for general
+            inquiries, or business opportunities — we&apos;re here to help.
           </p>
           <button className="border-2 border-white text-white hover:bg-white hover:text-[#018001] px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg">
             SEND A MESSAGE

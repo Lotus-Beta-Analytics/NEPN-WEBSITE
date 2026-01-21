@@ -136,7 +136,7 @@ export default function Operations() {
             </h1>
             <p className="text-xl mb-8">
               World-class facilities and cutting-edge technology powering
-              Nigeria's energy sector
+              Nigeriav&apos;s energy sector
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}

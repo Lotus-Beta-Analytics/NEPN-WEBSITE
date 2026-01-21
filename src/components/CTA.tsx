@@ -9,7 +9,7 @@ export default function CTA() {
             Ready to Get Started?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Let's work together to bring your vision to life
+            Let&apos;s work together to bring your vision to life
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

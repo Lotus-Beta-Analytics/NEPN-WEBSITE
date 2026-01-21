@@ -32,7 +32,7 @@ export default function Testimonials() {
               What Our Clients Say
             </h2>
             <p className="text-xl text-gray-600">
-              Don't just take our word for it
+              Don&apos;t just take our word for it
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
