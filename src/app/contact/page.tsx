@@ -143,7 +143,9 @@ export default function ContactPage() {
               <div className="w-16 h-16 bg-[#0000fe] rounded-full flex items-center justify-center text-white mx-auto mb-4">
                 {info.icon}
               </div>
-              <h3 className="text-xl font-bold mb-3 text-black">{info.title}</h3>
+              <h3 className="text-xl font-bold mb-3 text-black">
+                {info.title}
+              </h3>
               {info.details.map((detail, i) => (
                 <p key={i} className="text-gray-600 text-sm mb-1">
                   {detail}
@@ -164,7 +166,9 @@ export default function ContactPage() {
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold mb-6 text-black">Send Us a Message</h2>
+              <h2 className="text-3xl font-bold mb-6 text-black">
+                Send Us a Message
+              </h2>
               <p className="text-gray-600 mb-8">
                 Fill out the form below and our team will get back to you within
                 24 hours.
@@ -212,7 +216,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
+                      className="w-full px-4 py-3  text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
                       placeholder="+234 123 456 7890"
                     />
                   </div>
@@ -225,7 +229,7 @@ export default function ContactPage() {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
                       placeholder="Company Name"
                     />
                   </div>
@@ -262,7 +266,7 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={6}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors resize-none"
+                    className="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors resize-none"
                     placeholder="Tell us how we can help you..."
                   />
                 </div>
@@ -285,9 +289,12 @@ export default function ContactPage() {
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold mb-6 text-black">Visit Our Office</h2>
+              <h2 className="text-3xl font-bold mb-6 text-black">
+                Visit Our Office
+              </h2>
               <p className="text-gray-600 mb-8">
-                Find us at our head office in Abuja&apos;s Central Business District.
+                Find us at our head office in Abuja&apos;s Central Business
+                District.
               </p>
 
               {/* Google Maps Embed */}
@@ -306,7 +313,7 @@ export default function ContactPage() {
 
               {/* Directions */}
               <div className="bg-white rounded-xl p-6 shadow-md">
-                <h3 className="font-bold mb-4">Getting Here</h3>
+                <h3 className="font-bold mb-4 text-black" >Getting Here</h3>
                 <ul className="space-y-3 text-gray-600">
                   <li className="flex items-start gap-3">
                     <div className="w-6 h-6 bg-[#0000fe] rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold mt-0.5">
@@ -344,7 +351,9 @@ export default function ContactPage() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">Our Other Offices</h2>
+          <h2 className="text-3xl font-bold mb-4 text-black">
+            Our Other Offices
+          </h2>
           <p className="text-gray-600">
             We have a presence across key locations in Nigeria
           </p>

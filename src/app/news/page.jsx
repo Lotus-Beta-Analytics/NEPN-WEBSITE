@@ -182,7 +182,7 @@ export default function News() {
                 placeholder="Search news..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none"
+                className="w-full pl-12 text-black pr-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none"
               />
             </div>
 
