@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useRouter } from "next/navigation";
 
 export default function PartnersPage() {
   const partnerTypes = [
@@ -127,6 +128,8 @@ export default function PartnersPage() {
     },
   ];
 
+  const router = useRouter();
+
   return (
     <div className="bg-white">
       <Header />
@@ -185,7 +188,9 @@ export default function PartnersPage() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-6 text-black">Partnership Ecosystem</h2>
+          <h2 className="text-4xl font-bold mb-6 text-black">
+            Partnership Ecosystem
+          </h2>
           <p className="text-xl text-gray-700 leading-relaxed">
             At NEPN, we believe in the power of collaboration. Our diverse
             network of partners enables us to leverage global expertise,
@@ -211,7 +216,9 @@ export default function PartnersPage() {
               <div className="text-4xl font-bold text-[#0000fe] mb-2">
                 {type.count}
               </div>
-              <h3 className="text-2xl font-bold mb-3 text-black" >{type.title}</h3>
+              <h3 className="text-2xl font-bold mb-3 text-black">
+                {type.title}
+              </h3>
               <p className="text-gray-600">{type.description}</p>
             </motion.div>
           ))}
@@ -227,7 +234,9 @@ export default function PartnersPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 text-black">Why Partner with NEPN</h2>
+            <h2 className="text-4xl font-bold mb-4 text-black">
+              Why Partner with NEPN
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Strategic advantages of collaborating with Nigeria&apos;s leading
               indigenous energy company
@@ -248,7 +257,9 @@ export default function PartnersPage() {
                 <div className="w-16 h-16 bg-[#0000fe]/10 rounded-lg flex items-center justify-center text-[#0000fe] mb-4">
                   {benefit.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-black">{benefit.title}</h3>
+                <h3 className="text-xl font-bold mb-2 text-black">
+                  {benefit.title}
+                </h3>
                 <p className="text-gray-600 text-sm">{benefit.description}</p>
               </motion.div>
             ))}
@@ -333,7 +344,9 @@ export default function PartnersPage() {
                   <div className="text-[#0000fe] font-semibold mb-2">
                     {story.partner}
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-3">{story.project}</h3>
+                  <h3 className="text-xl font-bold text-black mb-3">
+                    {story.project}
+                  </h3>
                   <p className="text-gray-600 text-sm">{story.outcome}</p>
                 </div>
               </motion.div>
@@ -350,7 +363,9 @@ export default function PartnersPage() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-black">Partnership Criteria</h2>
+          <h2 className="text-4xl font-bold mb-4 text-black">
+            Partnership Criteria
+          </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             What we look for in potential partners
           </p>
@@ -409,24 +424,26 @@ export default function PartnersPage() {
             </div>
             <h2 className="text-4xl font-bold mb-6">Become a Partner</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Join forces with NEPN to unlock new opportunities in Nigeria&apos;s
-              dynamic energy sector. Let&apos;s create value together.
+              Join forces with NEPN to unlock new opportunities in
+              Nigeria&apos;s dynamic energy sector. Let&apos;s create value
+              together.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-[#0000fe] px-8 py-4 rounded-lg font-semibold"
+                onClick={() => router.push("/contact")}
               >
                 Partnership Inquiry
               </motion.button>
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold"
               >
                 Download Partnership Guide
-              </motion.button>
+              </motion.button> */}
             </div>
           </motion.div>
         </div>

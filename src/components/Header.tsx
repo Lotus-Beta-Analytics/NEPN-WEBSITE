@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 import Link from "next/link";
@@ -33,6 +33,27 @@ export default function Header() {
     setIsMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+
+    if (isMenuOpen) {
+      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+      body.style.height = "100vh";
+    } else {
+      html.style.overflow = "";
+      body.style.overflow = "";
+      body.style.height = "";
+    }
+
+    return () => {
+      html.style.overflow = "";
+      body.style.overflow = "";
+      body.style.height = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <>
@@ -91,7 +112,7 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-black/30 backdrop-blur-md z-[99]"
+              className="fixed inset-0 bg-black/30 backdrop-blur-md  z-[99]"
             />
 
             {/* Menu Panel */}

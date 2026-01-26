@@ -313,7 +313,7 @@ export default function ContactPage() {
 
               {/* Directions */}
               <div className="bg-white rounded-xl p-6 shadow-md">
-                <h3 className="font-bold mb-4 text-black" >Getting Here</h3>
+                <h3 className="font-bold mb-4 text-black">Getting Here</h3>
                 <ul className="space-y-3 text-gray-600">
                   <li className="flex items-start gap-3">
                     <div className="w-6 h-6 bg-[#0000fe] rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold mt-0.5">

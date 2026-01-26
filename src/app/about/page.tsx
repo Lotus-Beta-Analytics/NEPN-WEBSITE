@@ -4,6 +4,8 @@ import { motion } from "motion/react";
 import { Target, Eye, Award, TrendingUp, Users, Building } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+// import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function About() {
   const values = [
@@ -41,6 +43,8 @@ export default function About() {
     "Expand renewable energy portfolio to 25% by 2036",
   ];
 
+  const router = useRouter();
+
   return (
     <div className="bg-white  overflow-hidden">
       {/* Hero Section */}
@@ -70,8 +74,8 @@ export default function About() {
             transition={{ delay: 0.4 }}
             className="text-xl max-w-2xl mx-auto"
           >
-            Leading Nigeria&apos;s energy sector with innovation, sustainability, and
-            commitment to excellence
+            Leading Nigeria&apos;s energy sector with innovation,
+            sustainability, and commitment to excellence
           </motion.p>
         </div>
       </motion.section>
@@ -94,10 +98,10 @@ export default function About() {
           <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
             <p>
               Network E&P Nigeria Limited (NEPN) is a fully Nigerian-owned oil
-              and gas company at the forefront of the nation&apos;s energy sector.
-              Established with a vision to harness Nigeria&apos;s vast energy
-              resources responsibly, we have grown to become a trusted name in
-              exploration and production.
+              and gas company at the forefront of the nation&apos;s energy
+              sector. Established with a vision to harness Nigeria&apos;s vast
+              energy resources responsibly, we have grown to become a trusted
+              name in exploration and production.
             </p>
             <p>
               Our operations are centered on the Qua Iboe field, where we employ
@@ -128,8 +132,8 @@ export default function About() {
           >
             <h2 className="text-4xl font-bold mb-4 text-black">What We Do</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We provide comprehensive energy solutions across the entire value
-              chain
+              We deliver integrated energy solutions focused on operational
+              excellence, safety, and sustainability
             </p>
           </motion.div>
 
@@ -152,7 +156,7 @@ export default function About() {
               {
                 title: "Crude Evacuation Network",
                 description:
-                  "Reliable distribution networks ensuring consistent energy supply to power Nigerian industries and communities.",
+                  "Strategically positioned near the Qua Iboe Terminal, NEPN evacuates its crude through a shared evacuation network in partnership with two other oil producers",
                 image:
                   "https://images.unsplash.com/photo-1602860109210-b53229378ecf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
               },
@@ -275,7 +279,9 @@ export default function About() {
                 <div className="w-16 h-16 bg-[#0000fe]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#0000fe]">
                   {value.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-black">{value.title}</h3>
+                <h3 className="text-xl font-semibold mb-3 text-black">
+                  {value.title}
+                </h3>
                 <p className="text-gray-600">{value.description}</p>
               </motion.div>
             ))}
@@ -297,10 +303,9 @@ export default function About() {
             </div>
             <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
             <p className="text-lg leading-relaxed">
-              To be Nigeria&apos;s leading indigenous energy company, delivering
-              sustainable value through responsible exploration, production, and
-              supply of oil and gas resources while prioritizing environmental
-              stewardship, community development, and operational excellence.
+              To create sustainable value through safe, efficient, and
+              responsible oil and gas operations while upholding the highest
+              standards of environmental and community stewardship
             </p>
           </motion.div>
 
@@ -315,10 +320,9 @@ export default function About() {
             </div>
             <h2 className="text-3xl font-bold mb-6">Our Vision</h2>
             <p className="text-lg leading-relaxed">
-              To power Nigeria&apos;s development through innovative and sustainable
-              energy solutions, setting the benchmark for excellence in the oil
-              and gas industry while contributing to a cleaner, more prosperous
-              future for all Nigerians.
+              To deliver energy with excellence, innovation, and responsibility,
+              powering Nigeria&apos;s growth today while enabling a sustainable
+              future
             </p>
           </motion.div>
         </div>
@@ -333,7 +337,9 @@ export default function About() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 text-black">Our Strategic Goals</h2>
+            <h2 className="text-4xl font-bold mb-4 text-black">
+              Our Strategic Goals
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Ambitious targets driving our path to industry leadership
             </p>
@@ -376,16 +382,17 @@ export default function About() {
               opportunities and partnership possibilities with NEPN.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-[#0000fe] px-8 py-4 rounded-lg font-semibold"
               >
                 Explore Careers
-              </motion.button>
+              </motion.button> */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => router.push("/partners")}
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold"
               >
                 Partner With Us

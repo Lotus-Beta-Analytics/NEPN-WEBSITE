@@ -236,7 +236,9 @@ export default function Operations() {
                 </div>
 
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-2">{area.title}</h3>
+                  <h3 className="text-2xl font-bold mb-2 text-black">
+                    {area.title}
+                  </h3>
                   {area.location && (
                     <div className="flex items-center text-gray-600 mb-3">
                       <MapPin className="w-4 h-4 mr-2" />
@@ -280,7 +282,9 @@ export default function Operations() {
               <div className="w-16 h-16 bg-[#0000fe] rounded-xl flex items-center justify-center text-white mb-4">
                 {capability.icon}
               </div>
-              <h3 className="text-2xl font-bold mb-3">{capability.title}</h3>
+              <h3 className="text-2xl text-black font-bold mb-3">
+                {capability.title}
+              </h3>
               <p className="text-gray-600 mb-4">{capability.description}</p>
               <div className="flex flex-wrap gap-2">
                 {capability.metrics.map((metric, i) => (
