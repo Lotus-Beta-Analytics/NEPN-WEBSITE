@@ -1,10 +1,12 @@
 "use client";
 
 import { motion, useInView } from "motion/react";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
 export default function CTABanner() {
   const ref = useRef(null);
+  const router = useRouter();
 
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -35,7 +37,10 @@ export default function CTABanner() {
             <br />
             oil and gas player
           </h2>
-          <button className="bg-nepn-brightBlue hover:bg-nepn-blue text-white px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl">
+          <button
+            className="bg-nepn-brightBlue hover:bg-nepn-blue text-white px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+            onClick={() => router.push("/contact")}
+          >
             CONTACT US TODAY
           </button>
         </motion.div>

@@ -1,7 +1,9 @@
 "use client";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
 
 export default function ContactCTA() {
+  const router = useRouter();
   return (
     <section className="relative py-16 lg:py-24 bg-gradient-to-r from-[#018001] to-[#065406] overflow-hidden">
       <div className="absolute top-1/2 right-0 translate-x-1/3 -translate-y-1/2 z-0 pointer-events-none">
@@ -82,7 +84,10 @@ export default function ContactCTA() {
             We&apos;d love to hear from you. Reach out to our team for general
             inquiries, or business opportunities — we&apos;re here to help.
           </p>
-          <button className="border-2 border-white text-white hover:bg-white hover:text-[#018001] px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg">
+          <button
+            className="border-2 border-white text-white hover:bg-white hover:text-[#018001] px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg"
+            onClick={() => router.push("/contact")}
+          >
             SEND A MESSAGE
           </button>
         </div>

@@ -1,7 +1,9 @@
 "use client";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
 
 export default function SustainabilitySection() {
+  const router = useRouter();
   return (
     <section className="relative py-16 lg:py-24 bg-gray-50 overflow-hidden">
       <motion.div
@@ -56,7 +58,10 @@ export default function SustainabilitySection() {
 
         {/* CTA Button */}
         <div className="flex justify-center">
-          <button className="bg-[#0000FE] hover:bg-nepn-blue text-white px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl">
+          <button
+            className="bg-[#0000FE] hover:bg-nepn-blue text-white px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+            onClick={() => router.push("/sustainability")}
+          >
             ABOUT OUR SUSTAINABILITY
           </button>
         </div>

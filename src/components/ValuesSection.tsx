@@ -59,7 +59,7 @@ export default function ValuesSection({
       title: "EXCELLENCE IN OPERATIONS",
       description:
         "We strive for operational excellence, leveraging advanced technologies and best practices to lead the industry.",
-      color: "bg-[#0000FE]",
+      color: "bg-nepn-red",
     },
     {
       letter: "P",
@@ -73,7 +73,7 @@ export default function ValuesSection({
       title: "NURTURING COMMUNITIES",
       description:
         "We prioritize community engagement and support, ensuring our operations contribute positively to local development.",
-      color: "bg-[#0000FE]",
+      color: "bg-nepn-red",
     },
   ];
 
@@ -185,10 +185,10 @@ export default function ValuesSection({
               <motion.div
                 key={index}
                 variants={fadeUp}
-                whileHover={{
-                  y: -8,
-                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
-                }}
+                // whileHover={{
+                //   y: -8,
+                //   boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
+                // }}
                 transition={{
                   type: "spring",
                   stiffness: 300,

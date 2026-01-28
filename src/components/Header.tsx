@@ -139,13 +139,13 @@ export default function Header() {
 
               {/* Menu Items */}
               <div className="text-center sm:text-right w-full max-w-lg">
-                <motion.p
+                {/* <motion.p
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   className="text-xs sm:text-sm text-gray-500 mb-8 sm:mb-12 tracking-wider"
                 >
                   NAVIGATION MENU
-                </motion.p>
+                </motion.p> */}
 
                 <nav className="space-y-4 sm:space-y-6">
                   {menuItems.map((item, index) => (
