@@ -218,6 +218,7 @@ export default function About() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-[#0000fe] text-white px-8 py-4 rounded-lg font-semibold"
+              onClick={() => router.push("/operations")}
             >
               NEPN FACILITIES
             </motion.button>

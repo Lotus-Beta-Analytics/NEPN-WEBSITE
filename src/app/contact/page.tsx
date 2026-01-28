@@ -253,6 +253,7 @@ export default function ContactPage() {
                     <option value="media">Media & Press</option>
                     <option value="supplier">Supplier Registration</option>
                     <option value="complaint">Complaint/Feedback</option>
+                    <option value="complaint">Schedule a visit</option>
                   </select>
                 </div>
 

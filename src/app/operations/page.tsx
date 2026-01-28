@@ -12,6 +12,7 @@ import {
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useRouter } from "next/navigation";
 
 export default function Operations() {
   const operationalAreas = [
@@ -41,6 +42,8 @@ export default function Operations() {
         "Extensive pipeline network ensuring reliable delivery across Nigeria.",
     },
   ];
+
+  const router = useRouter();
 
   const capabilities = [
     {
@@ -427,6 +430,7 @@ export default function Operations() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white text-[#0000fe] px-8 py-4 rounded-lg font-semibold"
+              onClick={() => router.push("/contact")}
             >
               Schedule a Visit
             </motion.button>
