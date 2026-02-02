@@ -143,22 +143,19 @@ export default function About() {
                 title: "Exploration & Production",
                 description:
                   "Advanced seismic surveys and drilling operations in the Qua Iboe field, utilizing state-of-the-art technology for optimal resource recovery.",
-                image:
-                  "https://images.unsplash.com/photo-1765048808260-9f48d96caf98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+                image: "images/nepn_landing_page.webp",
               },
               {
                 title: "Crude Processing",
                 description:
                   "Efficient processing facilities that meet international standards, ensuring quality output and minimal environmental impact.",
-                image:
-                  "https://images.unsplash.com/photo-1749549437525-3b5aa46fa1db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+                image: "images/nepn-image-three.jpg",
               },
               {
                 title: "Crude Evacuation Network",
                 description:
                   "Strategically positioned near the Qua Iboe Terminal, NEPN evacuates its crude through a shared evacuation network in partnership with two other oil producers",
-                image:
-                  "https://images.unsplash.com/photo-1602860109210-b53229378ecf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+                image: "images/hero-bg.jpg",
               },
             ].map((service, index) => (
               <motion.div

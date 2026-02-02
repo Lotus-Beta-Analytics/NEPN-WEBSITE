@@ -212,7 +212,7 @@ export default function TestimonialsSection() {
                     20+
                   </div>
                   <div className="text-base lg:text-lg font-medium mb-8">
-                    Partners
+                    Testimonials
                   </div>
                 </motion.div>
               </div>

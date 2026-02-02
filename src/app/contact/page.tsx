@@ -37,11 +37,7 @@ export default function ContactPage() {
     {
       icon: <MapPin className="w-8 h-8" />,
       title: "Head Office",
-      details: [
-        "5 Terminal road, Inua Eyet Ikot, Ibeno LGA Akwaibom,",
-
-        "Nigeria",
-      ],
+      details: ["4 Ademola street, SW Ikoyi, Lagos,", "Nigeria"],
     },
     {
       icon: <Phone className="w-8 h-8" />,
@@ -309,8 +305,8 @@ export default function ContactPage() {
                       1
                     </div>
                     <span>
-                      From Murtala Muhammed International Airport, Muritala Airport Road, Ikeja, Lagos: 30 minutes by
-                      car
+                      From Murtala Muhammed International Airport, Muritala
+                      Airport Road, Ikeja, Lagos: 30 minutes by car
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
@@ -394,13 +390,11 @@ export default function ContactPage() {
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
               <div className="flex items-center gap-3 bg-white/20 px-6 py-3 rounded-lg">
                 <Phone className="w-6 h-6" />
-                <span className="text-xl font-bold">
-                  24/7 Hotline: +234 800 NEPN 911
-                </span>
+                <span className="text-xl font-bold">09088855012</span>
               </div>
               <div className="flex items-center gap-3 bg-white/20 px-6 py-3 rounded-lg">
                 <Mail className="w-6 h-6" />
-                <span className="text-xl font-bold">emergency@nepn.com.ng</span>
+                <span className="text-xl font-bold">Info@networkeandp.com</span>
               </div>
             </div>
           </motion.div>

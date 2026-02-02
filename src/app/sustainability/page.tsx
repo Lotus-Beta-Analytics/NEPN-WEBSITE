@@ -114,7 +114,7 @@ export default function Sustainability() {
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              "url(https://images.unsplash.com/photo-1659290541504-6db0bbd00d9a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920)",
+              "url(/images/nepn-image-three.jpg)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

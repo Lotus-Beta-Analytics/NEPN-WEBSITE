@@ -24,7 +24,7 @@ export default function News() {
   const newsArticles = [
     {
       image:
-        "https://images.unsplash.com/photo-1745847768380-2caeadbb3b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+        "/images/nepn-image-three.jpg",
 
       title: "NEPN Achieves Major Milestone in Qua Iboe Field Development",
       date: "January 8, 2026",
@@ -33,94 +33,6 @@ export default function News() {
         "Network E&P Nigeria Limited successfully completes Phase 2 of the Qua Iboe field expansion project, marking a significant milestone in our commitment to energy security.",
       content:
         "The expansion increases our production capacity by 30% and incorporates the latest in sustainable extraction technology.",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1745847768380-2caeadbb3b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-
-      title: "Sustainable Energy Initiative Launched",
-      date: "January 5, 2026",
-      category: "Sustainability",
-      excerpt:
-        "NEPN unveils comprehensive sustainability program targeting net-zero emissions by 2040, setting new industry standards.",
-      content:
-        "Our multi-billion naira investment in renewable energy and carbon capture technology demonstrates our commitment to environmental stewardship.",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1745847768380-2caeadbb3b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-      title: "NEPN Partners with International Energy Leaders",
-      date: "December 28, 2025",
-      category: "Company News",
-      excerpt:
-        "Strategic partnership announced with leading global energy firms to enhance technological capabilities and expand operations.",
-      content:
-        "This partnership will bring cutting-edge technology and expertise to our Nigerian operations.",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1758798349125-5c297b18b8b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-      title: "Record Safety Performance Achieved in 2025",
-      date: "December 20, 2025",
-      category: "Operations",
-      excerpt:
-        "NEPN celebrates one full year without a Lost Time Injury (LTI), setting a new company record for workplace safety.",
-      content:
-        "5 million safe work hours completed, demonstrating our unwavering commitment to employee safety.",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1659290541504-6db0bbd00d9a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-      title: "Community Development Program Expands to 50 Villages",
-      date: "December 15, 2025",
-      category: "Community",
-      excerpt:
-        "NEPN's community investment program reaches milestone with expansion into 50 host communities across Akwa Ibom State.",
-      content:
-        "Programs include education scholarships, healthcare facilities, and infrastructure development.",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1765048808260-9f48d96caf98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-      title: "New Production Well Comes Online",
-      date: "December 10, 2025",
-      category: "Operations",
-      excerpt:
-        "Well QIB-16 successfully commissioned, adding 8,000 barrels per day to our production capacity.",
-      content:
-        "The well utilizes advanced drilling technology and environmental protection measures.",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1749549437525-3b5aa46fa1db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-      title: "NEPN Receives Environmental Excellence Award",
-      date: "November 28, 2025",
-      category: "Sustainability",
-      excerpt:
-        "National Environmental Standards and Regulations Enforcement Agency (NESREA) honors NEPN for outstanding environmental performance.",
-      content:
-        "Recognition for our comprehensive environmental management and zero-incident record.",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1602860109210-b53229378ecf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-      title: "Pipeline Integrity Program Completed",
-      date: "November 15, 2025",
-      category: "Operations",
-      excerpt:
-        "Comprehensive inspection and upgrade of 1,200km pipeline network completed ahead of schedule.",
-      content:
-        "Smart pigging technology and real-time monitoring systems ensure maximum safety and efficiency.",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1745847768380-2caeadbb3b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
-      title: "1000 Youth Trained in Technical Skills Program",
-      date: "November 5, 2025",
-      category: "Community",
-      excerpt:
-        "NEPN's youth empowerment initiative reaches milestone with 1,000 young Nigerians trained in oil and gas technical skills.",
-      content: "80% of graduates have secured employment in the energy sector.",
     },
   ];
 

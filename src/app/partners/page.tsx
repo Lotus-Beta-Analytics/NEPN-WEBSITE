@@ -106,25 +106,22 @@ export default function PartnersPage() {
     {
       partner: "International Energy Solutions Ltd",
       project: "Qua Iboe Field Expansion",
-      image:
-        "https://images.unsplash.com/photo-1765048808260-9f48d96caf98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      image: "images/nepn_landing_page.webp",
       outcome:
         "30% increase in production capacity with 25% reduction in operational costs",
     },
     {
       partner: "Nigerian Engineering Consortium",
       project: "Pipeline Infrastructure Upgrade",
-      image:
-        "https://images.unsplash.com/photo-1602860109210-b53229378ecf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      image: "/images/hero-bg.jpg",
       outcome: "1,200km pipeline modernization creating 500 local jobs",
     },
     {
       partner: "Global Tech Systems",
       project: "Digital Transformation Initiative",
-      image:
-        "https://images.unsplash.com/photo-1749549437525-3b5aa46fa1db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      image: "/images/nepn-image-three.jpg",
       outcome:
-        "Implementation of AI-powered monitoring reducing incidents by 45%",
+        "Deployment of enhanced monitoring and safety systems reducing incidents by 45%",
     },
   ];
 
@@ -142,8 +139,7 @@ export default function PartnersPage() {
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1745847768380-2caeadbb3b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920)",
+            backgroundImage: "url(/images/nepn-image-three.jpg)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

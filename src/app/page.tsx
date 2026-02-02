@@ -20,7 +20,7 @@ export default function Home() {
       <ValuesSection
         mediaSrc="/videos/bg_video.mp4"
         mediaType="video"
-        posterImage="/images/nepnI.jpg"
+        posterImage="/images/nepn.jpg"
       />
       <SustainabilitySection />
       <CTABanner />

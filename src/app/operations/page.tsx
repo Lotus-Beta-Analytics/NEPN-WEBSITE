@@ -19,16 +19,14 @@ export default function Operations() {
     {
       title: "Qua Iboe Field",
       location: "Akwa Ibom State",
-      image:
-        "https://images.unsplash.com/photo-1765048808260-9f48d96caf98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      image: "/images/nepn_landing_page.webp",
       status: "Active Production",
       description:
         "Our flagship operation in the Qua Iboe field represents the cornerstone of NEPN's production activities.",
     },
     {
       title: "Processing Facilities",
-      image:
-        "https://images.unsplash.com/photo-1749549437525-3b5aa46fa1db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      image: "/images/hero-bg.jpg",
       status: "Operational",
       description:
         "State-of-the-art processing facilities ensuring efficient transformation of crude oil.",
@@ -36,7 +34,7 @@ export default function Operations() {
     {
       title: "Crude Evacuation Network",
       image:
-        "https://images.unsplash.com/photo-1602860109210-b53229378ecf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+        "/images/nepn-image-three.jpg",
       status: "Active",
       description:
         "Extensive pipeline network ensuring reliable delivery across Nigeria.",
@@ -119,7 +117,7 @@ export default function Operations() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "url(https://images.unsplash.com/photo-1765048808260-9f48d96caf98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920)",
+              "url(images/nepn_landing_page.webp)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -174,7 +172,7 @@ export default function Operations() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { value: "1000", label: "Barrels Per Day", unit: "bpd" },
-            { value: "15", label: "Active Wells", unit: "wells" },
+            { value: "2", label: "Active Wells", unit: "wells" },
             { value: "1,200", label: "Pipeline Network", unit: "km" },
             { value: "99.5", label: "Operational Uptime", unit: "%" },
           ].map((stat, index) => (
