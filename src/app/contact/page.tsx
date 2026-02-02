@@ -38,58 +38,46 @@ export default function ContactPage() {
       icon: <MapPin className="w-8 h-8" />,
       title: "Head Office",
       details: [
-        "Plot 1234, Central Business District",
-        "Abuja, FCT",
+        "5 Terminal road, Inua Eyet Ikot, Ibeno LGA Akwaibom,",
+
         "Nigeria",
       ],
     },
     {
       icon: <Phone className="w-8 h-8" />,
       title: "Phone",
-      details: [
-        "+234 123 456 7890",
-        "+234 123 456 7891",
-        "Toll Free: 0800-NEPN-OIL",
-      ],
+      details: ["09088855012"],
     },
     {
       icon: <Mail className="w-8 h-8" />,
       title: "Email",
-      details: [
-        "info@nepn.com.ng",
-        "careers@nepn.com.ng",
-        "partners@nepn.com.ng",
-      ],
+      details: ["Info@networkeandp.com"],
     },
     {
       icon: <Clock className="w-8 h-8" />,
       title: "Business Hours",
-      details: [
-        "Monday - Friday: 8:00 AM - 5:00 PM",
-        "Saturday: 9:00 AM - 1:00 PM",
-        "Sunday: Closed",
-      ],
+      details: ["Monday - sunday: 8:00 AM - 5:00 PM"],
     },
   ];
 
   const offices = [
     {
       name: "Lagos Office",
-      address: "Victoria Island, Lagos State",
-      phone: "+234 123 456 7892",
-      email: "lagos@nepn.com.ng",
+      address: "4 Ademola street, SW Ikoyi, Lagos",
+      phone: "09088855012",
+      email: "Info@networkeandp.com",
     },
-    {
-      name: "Port Harcourt Office",
-      address: "Trans Amadi, Port Harcourt, Rivers State",
-      phone: "+234 123 456 7893",
-      email: "portharcourt@nepn.com.ng",
-    },
+    // {
+    //   name: "Port Harcourt Office",
+    //   address: "Trans Amadi, Port Harcourt, Rivers State",
+    //   phone: "+234 123 456 7893",
+    //   email: "portharcourt@nepn.com.ng",
+    // },
     {
       name: "Akwa Ibom Office",
-      address: "Uyo, Akwa Ibom State",
-      phone: "+234 123 456 7894",
-      email: "akwaibom@nepn.com.ng",
+      address: "5 Terminal road, Inua Eyet Ikot, Ibeno LGA Akwaibom",
+      phone: "09088855012",
+      email: "Info@networkeandp.com",
     },
   ];
 
@@ -301,7 +289,7 @@ export default function ContactPage() {
               {/* Google Maps Embed */}
               <div className="rounded-xl overflow-hidden shadow-xl mb-8 h-96">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3939.9319374934867!2d7.488670814770842!3d9.072264493493967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0ba78eb61a47%3A0xd09df9f46c84d1c!2sCentral%20Business%20District%2C%20Abuja!5e0!3m2!1sen!2sng!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.6297189277807!2d3.4128136!3d6.441571700000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b290b6b33d3%3A0x7888c2ea2ce0a72c!2s14%20Ademola%20St%2C%20Ikoyi%2C%20Lagos%20106104%2C%20Lagos!5e0!3m2!1sen!2sng!4v1770029643783!5m2!1sen!2sng"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -321,7 +309,7 @@ export default function ContactPage() {
                       1
                     </div>
                     <span>
-                      From Nnamdi Azikiwe International Airport: 30 minutes by
+                      From Murtala Muhammed International Airport, Muritala Airport Road, Ikeja, Lagos: 30 minutes by
                       car
                     </span>
                   </li>
@@ -352,15 +340,13 @@ export default function ContactPage() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4 text-black">
-            Our Other Offices
-          </h2>
+          <h2 className="text-3xl font-bold mb-4 text-black">Our Offices</h2>
           <p className="text-gray-600">
             We have a presence across key locations in Nigeria
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {offices.map((office, index) => (
             <motion.div
               key={index}
@@ -369,12 +355,12 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-white rounded-xl p-6 shadow-lg border-2 border-transparent hover:border-[#0000fe] transition-all"
+              className="bg-white rounded-xl text-center p-6 shadow-lg border-2 border-transparent hover:border-[#0000fe] transition-all"
             >
               <h3 className="text-xl font-bold mb-4 text-[#0000fe]">
                 {office.name}
               </h3>
-              <div className="space-y-3 text-gray-600">
+              <div className="space-y-3 flex flex-col place-items-center text-gray-600">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-[#0000fe] mt-1 flex-shrink-0" />
                   <span className="text-sm">{office.address}</span>

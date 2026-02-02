@@ -10,7 +10,10 @@ export default function AboutSection() {
   const router = useRouter();
 
   return (
-    <section ref={ref} className="relative bg-nepn-navy overflow-hidden px-12">
+    <section
+      ref={ref}
+      className="relative bg-nepn-navy overflow-hidden px:4 md:px-12"
+    >
       <div className="relative z-10 pt-24 pb-32 lg:pt-32 lg:pb-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div

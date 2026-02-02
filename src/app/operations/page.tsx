@@ -164,7 +164,7 @@ export default function Operations() {
             Operational Excellence
           </h2>
           <p className="text-xl text-gray-700 leading-relaxed">
-            NEPN operates state-of-the-art facilities across Nigeria, leveraging
+            NEPN operates state-of-the-art facilities in Nigeria, leveraging
             advanced technology and best practices to ensure safe, efficient,
             and sustainable energy production.
           </p>
@@ -173,7 +173,7 @@ export default function Operations() {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { value: "50,000", label: "Barrels Per Day", unit: "bpd" },
+            { value: "1000", label: "Barrels Per Day", unit: "bpd" },
             { value: "15", label: "Active Wells", unit: "wells" },
             { value: "1,200", label: "Pipeline Network", unit: "km" },
             { value: "99.5", label: "Operational Uptime", unit: "%" },

@@ -29,7 +29,7 @@ export default function Sustainability() {
       title: "Health & Wellbeing",
       description:
         "Comprehensive health programs for employees and host communities",
-      stats: "10,000+ beneficiaries",
+      stats: "2000+ beneficiaries",
     },
     {
       icon: <Leaf className="w-12 h-12" />,
@@ -232,7 +232,7 @@ export default function Sustainability() {
               {[
                 { value: "5M+", label: "Safe Work Hours" },
                 { value: "100%", label: "Compliance Rate" },
-                { value: "2,500+", label: "Staff Trained" },
+                { value: "100+", label: "Staff Trained" },
                 { value: "24/7", label: "Monitoring" },
               ].map((stat, index) => (
                 <motion.div
@@ -300,15 +300,20 @@ export default function Sustainability() {
             className="relative h-80 rounded-2xl overflow-hidden group"
           >
             <Image
-              src="https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200"
+              src="https://images.unsplash.com/photo-1769335537919-a1f45f3f30bd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Solar panels generating renewable energy"
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
               <div className="p-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">Renewable Energy</h3>
-                <p>Investing in solar and wind power solutions</p>
+                <h3 className="text-2xl font-bold mb-2">
+                  Community Development
+                </h3>
+                <p>
+                  Supporting local communities through sustainable social
+                  initiatives
+                </p>
               </div>
             </div>
           </motion.div>
@@ -320,8 +325,8 @@ export default function Sustainability() {
             className="relative h-80 rounded-2xl overflow-hidden group"
           >
             <Image
-              src="https://images.unsplash.com/photo-1645398709736-23bc4cb9ad89?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Solar panels generating renewable energy"
+              src="https://images.unsplash.com/photo-1529220502050-f15e570c634e?q=80&w=1229&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"
             />

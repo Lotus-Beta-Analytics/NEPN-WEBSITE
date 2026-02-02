@@ -17,10 +17,10 @@ export default function PartnersPage() {
   const partnerTypes = [
     {
       icon: <Globe className="w-12 h-12" />,
-      title: "International Partners",
+      title: "Local Partners",
       description:
         "Collaborations with leading global energy companies bringing expertise and technology",
-      count: "15+",
+      count: "10+",
     },
     {
       icon: <Users className="w-12 h-12" />,

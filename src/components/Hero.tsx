@@ -7,21 +7,21 @@ const heroSlides = [
     description:
       "At NEPN, we discover and harness energy responsibly to fuel economies and empower communities",
     mediaType: "video",
-    mediaSrc: "/videos/bg-video.mp4",
+    mediaSrc: "/videos/bg_video.mp4",
   },
   {
     title: "Leading Indigenous\nOil & Gas Player",
     description:
       "Committed to sustainable energy solutions and environmental stewardship in Nigeria",
     mediaType: "image",
-    mediaSrc: "/images/hero-bg.jpg", // Your video path
+    mediaSrc: "/images/nepn_landing_page.webp",
   },
   {
     title: "Excellence in\nOperations",
     description:
       "Delivering operational excellence through advanced technologies and best practices",
     mediaType: "image", // Solid color background
-    mediaSrc: "/images/heroTwo-bg.jpg",
+    mediaSrc: "/images/hero-bg.jpg",
   },
 ];
 
@@ -31,7 +31,7 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 10000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -82,7 +82,7 @@ export default function Hero() {
       <div className="relative h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl w-full">
           {/* More Transparent Glass Card with better text contrast */}
-          <div className="backdrop-blur-md bg-[rgba(0,0,90,0.35)] rounded-[20px] p-8 lg:p-12 text-center shadow-2xl border border-white/10">
+          <div className="backdrop-blur-sm  rounded-[20px] p-8 lg:p-12 text-center shadow-2xl border border-white/10">
             <h1 className="text-4xl sm:text-3xl lg:text-5xl font-bold text-white mb-6 whitespace-pre-line leading-[3rem] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               {heroSlides[currentSlide].title}
             </h1>
