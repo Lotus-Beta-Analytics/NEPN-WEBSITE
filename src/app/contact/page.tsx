@@ -37,7 +37,7 @@ export default function ContactPage() {
     {
       icon: <MapPin className="w-8 h-8" />,
       title: "Head Office",
-      details: ["4 Ademola street, SW Ikoyi, Lagos,", "Nigeria"],
+      details: ["14 Ademola street, SW Ikoyi, Lagos,", "Nigeria"],
     },
     {
       icon: <Phone className="w-8 h-8" />,
@@ -62,7 +62,7 @@ export default function ContactPage() {
   const offices = [
     {
       name: "Lagos Office",
-      address: "4 Ademola street, SW Ikoyi, Lagos",
+      address: "14 Ademola street, SW Ikoyi, Lagos",
       phone: "09088855012",
       email: "Info@networkeandp.com",
     },
