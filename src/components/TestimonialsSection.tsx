@@ -211,9 +211,6 @@ export default function TestimonialsSection() {
                   <div className="text-5xl lg:text-6xl font-semibold mb-2">
                     20+
                   </div>
-                  <div className="text-base lg:text-lg font-medium mb-8">
-                    Testimonials
-                  </div>
                 </motion.div>
               </div>
 

@@ -20,7 +20,7 @@ const counterData = [
     icon: "/images/logoFour.png",
     endValue: 20,
     title: "Years of Excellence",
-    suffix: "",
+    suffix: "+",
   },
   {
     icon: "/images/logoOne.png",
@@ -56,7 +56,7 @@ function CounterCard({
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (cardRef.current) {

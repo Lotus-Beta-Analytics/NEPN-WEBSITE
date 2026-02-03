@@ -278,8 +278,7 @@ export default function ContactPage() {
                 Visit Our Office
               </h2>
               <p className="text-gray-600 mb-8">
-                Find us at our head office in Abuja&apos;s Central Business
-                District.
+                Find us at our head office in Lagos.
               </p>
 
               {/* Google Maps Embed */}
