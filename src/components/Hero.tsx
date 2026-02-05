@@ -15,7 +15,7 @@ const heroSlides = [
     description:
       "Committed to sustainable energy solutions and environmental stewardship in Nigeria",
     mediaType: "image",
-    mediaSrc: "/images/nepn_landing_page.webp",
+    mediaSrc: "/images/nepn_landing_page.jpg",
   },
   {
     title: "Excellence in\nOperations",
