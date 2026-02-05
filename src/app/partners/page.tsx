@@ -106,14 +106,14 @@ export default function PartnersPage() {
     {
       partner: "International Energy Solutions Ltd",
       project: "Qua Iboe Field Expansion",
-      image: "images/nepn_landing_page.webp",
+      image: "images/nepn_landing_page.jpg",
       outcome:
         "30% increase in production capacity with 25% reduction in operational costs",
     },
     {
       partner: "Nigerian Engineering Consortium",
       project: "Pipeline Infrastructure Upgrade",
-      image: "/images/hero-bg.jpg",
+      image: "/images/nepn-images-four.jpg",
       outcome: "1,200km pipeline modernization creating 500 local jobs",
     },
     {

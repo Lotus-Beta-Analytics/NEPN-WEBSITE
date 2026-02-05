@@ -15,7 +15,7 @@ export default function CTABanner() {
       {/* Background Image with Gradient */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url(/images/nepn_landing_page.webp)" }}
+        style={{ backgroundImage: "url(/images/nepn_landing_page.jpg)" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900/80 to-transparent" />
       </div>

@@ -113,8 +113,7 @@ export default function Sustainability() {
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage:
-              "url(/images/nepn-image-three.jpg)",
+            backgroundImage: "url(/images/nepn-image-three.jpg)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -300,7 +299,7 @@ export default function Sustainability() {
             className="relative h-80 rounded-2xl overflow-hidden group"
           >
             <Image
-              src="https://images.unsplash.com/photo-1769335537919-a1f45f3f30bd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="/images/nepn.jpg"
               alt="Solar panels generating renewable energy"
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -325,7 +324,7 @@ export default function Sustainability() {
             className="relative h-80 rounded-2xl overflow-hidden group"
           >
             <Image
-              src="https://images.unsplash.com/photo-1529220502050-f15e570c634e?q=80&w=1229&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="/images/safety-pic.jpeg"
               alt=""
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"

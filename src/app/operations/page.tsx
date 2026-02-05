@@ -19,22 +19,21 @@ export default function Operations() {
     {
       title: "Qua Iboe Field",
       location: "Akwa Ibom State",
-      image: "/images/nepn_landing_page.webp",
+      image: "/images/nepn_landing_page.jpg",
       status: "Active Production",
       description:
         "Our flagship operation in the Qua Iboe field represents the cornerstone of NEPN's production activities.",
     },
     {
       title: "Processing Facilities",
-      image: "/images/hero-bg.jpg",
+      image: "/images/nepn-images-four.jpg",
       status: "Operational",
       description:
         "State-of-the-art processing facilities ensuring efficient transformation of crude oil.",
     },
     {
       title: "Crude Evacuation Network",
-      image:
-        "/images/nepn-image-three.jpg",
+      image: "/images/nepn-image-three.jpg",
       status: "Active",
       description:
         "Extensive pipeline network ensuring reliable delivery across Nigeria.",
@@ -116,8 +115,7 @@ export default function Operations() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage:
-              "url(images/nepn_landing_page.webp)",
+            backgroundImage: "url(images/nepn_landing_page.webp)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

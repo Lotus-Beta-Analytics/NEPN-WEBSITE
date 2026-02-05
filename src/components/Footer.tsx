@@ -54,7 +54,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/who-we-are"
+                  href="/about"
                   className="text-white/60 hover:text-white text-[15px] transition-colors"
                 >
                   Who we are

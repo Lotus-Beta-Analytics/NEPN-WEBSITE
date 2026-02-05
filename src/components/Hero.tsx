@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const heroSlides = [
@@ -36,6 +37,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
+  const router = useRouter();
   return (
     <section className="relative h-[600px] lg:h-[700px] w-full overflow-hidden">
       {/* Background Media - with transition */}
@@ -89,7 +91,10 @@ export default function Hero() {
             <p className="text-base lg:text-lg text-white mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-medium">
               {heroSlides[currentSlide].description}
             </p>
-            <button className="bg-white/20 text-white px-8 py-3 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105">
+            <button
+              onClick={() => router.push("/about")}
+              className="bg-white/20 text-white px-8 py-3 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+            >
               EXPLORE NOW
             </button>
 
