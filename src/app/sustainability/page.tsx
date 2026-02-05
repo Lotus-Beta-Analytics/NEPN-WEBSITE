@@ -324,7 +324,7 @@ export default function Sustainability() {
             className="relative h-80 rounded-2xl overflow-hidden group"
           >
             <Image
-              src="/images/safety-pic.jpeg"
+              src="/images/safety-pic-lol.jpeg"
               alt=""
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"
