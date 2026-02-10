@@ -20,7 +20,7 @@ export default function PartnersPage() {
       title: "Local Partners",
       description:
         "Collaborations with leading global energy companies bringing expertise and technology",
-      count: "10+",
+      count: "15+",
     },
     {
       icon: <Users className="w-12 h-12" />,

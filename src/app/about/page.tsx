@@ -343,9 +343,12 @@ export default function About() {
             </p>
           </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-6">
-              {goals.map((goal, index) => (
+          <div className="grid grid-cols-2 gap-4 px-8 md:px-20">
+            {goals.map((goal, index) => {
+              const isLast = index === goals.length - 1;
+              const isOdd = goals.length % 2 !== 0;
+
+              return (
                 <motion.div
                   key={index}
                   initial={{ x: index % 2 === 0 ? -30 : 30, opacity: 0 }}
@@ -353,15 +356,18 @@ export default function About() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white p-6 rounded-lg shadow-md flex items-start gap-4"
+                  className={`
+        bg-white p-6 rounded-lg shadow-md flex items-start gap-4
+        ${isLast && isOdd ? "md:col-span-2 md:mx-auto md:max-w-md" : ""}
+      `}
                 >
                   <div className="w-8 h-8 bg-[#0000fe] rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold mt-1">
                     {index + 1}
                   </div>
                   <p className="text-gray-700 text-lg">{goal}</p>
                 </motion.div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>

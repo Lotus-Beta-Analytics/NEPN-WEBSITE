@@ -53,7 +53,7 @@ export default function ContactPage() {
       icon: <Clock className="w-8 h-8" />,
       title: "Business Hours",
       details: [
-        "Akwa Ibom (Field): Monday–Sunday, 8:00 AM–5:00 PM",
+        "Akwa Ibom (Field): Monday–Friday, 8:00 AM–5:00 PM",
         "Lagos: Monday–Friday, 8:00 AM–5:00 PM",
       ],
     },

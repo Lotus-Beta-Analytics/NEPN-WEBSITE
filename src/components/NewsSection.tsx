@@ -8,7 +8,7 @@ const newsItems = [
     title: "Safety First Initiative",
     description:
       "Our commitment to maintaining the highest safety standards across all operations continues to set industry benchmarks.",
-    image: "/images/news-safety-1.jpg",
+    image: "/images/safety-pic-lol.jpeg",
     date: "January 10, 2026",
     category: "Safety",
   },
@@ -16,7 +16,7 @@ const newsItems = [
     title: "Environmental Excellence",
     description:
       "NEPN achieves new milestones in environmental stewardship and sustainable energy practices.",
-    image: "/images/news-safety-2.jpg",
+    image: "/images/nepn-images-four.jpg",
     date: "January 8, 2026",
     category: "Sustainability",
   },
@@ -24,7 +24,7 @@ const newsItems = [
     title: "Community Development",
     description:
       "Expanding our CSR initiatives to empower more communities across Nigeria.",
-    image: "/images/news-safety-1.jpg",
+    image: "/images/nepn.jpg",
     date: "January 5, 2026",
     category: "CSR",
   },
@@ -32,7 +32,7 @@ const newsItems = [
     title: "Innovation in Energy",
     description:
       "Implementing cutting-edge technology to enhance operational efficiency and reduce environmental impact.",
-    image: "/images/news-safety-2.jpg",
+    image: "/images/nepn-image-three.jpg",
     date: "January 3, 2026",
     category: "Technology",
   },
@@ -40,7 +40,7 @@ const newsItems = [
     title: "Partnership Expansion",
     description:
       "Forging new strategic partnerships to drive growth and sustainability in the energy sector.",
-    image: "/images/news-safety-1.jpg",
+    image: "/images/partnerships.jpg",
     date: "December 28, 2025",
     category: "Partnerships",
   },
@@ -48,7 +48,7 @@ const newsItems = [
     title: "Operational Excellence",
     description:
       "Achieving record production levels while maintaining our commitment to environmental responsibility.",
-    image: "/images/news-safety-2.jpg",
+    image: "/images/nepn-images-four.jpg",
     date: "December 25, 2025",
     category: "Operations",
   },
@@ -62,7 +62,7 @@ export default function NewsSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) =>
-        prev + itemsPerPage >= newsItems.length ? 0 : prev + itemsPerPage
+        prev + itemsPerPage >= newsItems.length ? 0 : prev + itemsPerPage,
       );
     }, 5000);
 
@@ -74,7 +74,7 @@ export default function NewsSection() {
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
-      prev + itemsPerPage >= newsItems.length ? 0 : prev + itemsPerPage
+      prev + itemsPerPage >= newsItems.length ? 0 : prev + itemsPerPage,
     );
   };
 
@@ -82,7 +82,7 @@ export default function NewsSection() {
     setCurrentIndex((prev) =>
       prev === 0
         ? Math.floor((newsItems.length - 1) / itemsPerPage) * itemsPerPage
-        : prev - itemsPerPage
+        : prev - itemsPerPage,
     );
   };
 
@@ -92,7 +92,7 @@ export default function NewsSection() {
 
   const visibleItems = newsItems.slice(
     currentIndex,
-    currentIndex + itemsPerPage
+    currentIndex + itemsPerPage,
   );
 
   return (
