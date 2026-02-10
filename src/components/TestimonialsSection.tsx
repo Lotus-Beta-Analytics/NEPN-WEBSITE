@@ -7,31 +7,39 @@ import Image from "next/image";
 const testimonials = [
   {
     quote:
-      "NEPN isn't just a business partner - they are a value driven ally. ",
-    name: "Thomas Kruger",
-    role: "Director of Operations",
-    image: "/images/testimonial-thomas.jpg",
+      "NEPN operates with a strong sense of responsibility and financial discipline. Their processes are clear, structured, and dependable.",
+    name: "Soname Gbemiga",
+    role: "Senior Accountant",
   },
   {
     quote:
-      "NEPN isn't just a business partner - they are a value driven ally. ",
-    name: "Faitma Lawal",
-    role: "Regional Project Manager",
-    image: "/images/testimonial-faitma.jpg",
+      "Working with NEPN has shown a consistent commitment to accountability and operational excellence across all projects.",
+    name: "Ewere Uzah",
+    role: "AGMO",
   },
   {
     quote:
-      "Working with NEPN has transformed our approach to sustainability. Their guidance and ethics are unmatched.",
-    name: "David Oladele",
-    role: "Senior Engineer",
-    image: "/images/testimonial-faitma.jpg",
+      "NEPN brings reliability and attention to detail that make complex workflows easier to manage and execute.",
+    name: "Adeyemo Gbenga",
+    role: "HFA",
   },
   {
     quote:
-      "NEPN's professionalism and integrity make them a trusted partner in every project we undertake.",
-    name: "Ngozi Adebayo",
-    role: "Project Coordinator",
-    image: "/images/testimonial-faitma.jpg",
+      "NEPN maintains high standards in facilities management, ensuring efficiency, safety, and long-term value.",
+    name: "Badmus Adebayo",
+    role: "Facility Manager",
+  },
+  {
+    quote:
+      "NEPN approaches every engagement with professionalism and a clear focus on delivering sustainable outcomes.",
+    name: "Mikele Oziegbe",
+    role: "",
+  },
+  {
+    quote:
+      "The consistency and integrity of NEPN’s work make them a trusted partner across different initiatives.",
+    name: "Nnochiri Ogbonna",
+    role: "",
   },
 ];
 
@@ -119,14 +127,14 @@ export default function TestimonialsSection() {
                   </p>
 
                   <div className="flex items-center gap-4 mt-auto">
-                    <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                      <Image
+                    {/* <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-lg"> */}
+                    {/* <Image
                         src={testimonial.image}
                         alt={testimonial.name}
                         fill
                         className="object-cover"
-                      />
-                    </div>
+                      /> */}
+                    {/* </div> */}
                     <div>
                       <p className="text-[15px] font-medium text-black">
                         {testimonial.name}
