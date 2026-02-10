@@ -17,7 +17,7 @@ export default function PartnersPage() {
   const partnerTypes = [
     {
       icon: <Globe className="w-12 h-12" />,
-      title: "Local Partners",
+      title: "Strategic Partners",
       description:
         "Collaborations with leading global energy companies bringing expertise and technology",
       count: "15+",
