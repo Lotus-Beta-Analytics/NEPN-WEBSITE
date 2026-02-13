@@ -6,7 +6,7 @@ import { axiosInstance } from "../axios-instance";
 async function postContactForm(payload?: any) {
   try {
     const res = await axiosInstance({
-      url: "slider",
+      url: "contact-form",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,12 +26,10 @@ interface EmailResponse {
   success: boolean;
 }
 
-
 type EmailFormData = any;
 
 export function useSendContact() {
   const queryClient = useQueryClient();
-
 
   const { mutate, isError, error, isSuccess, reset } = useMutation<
     EmailResponse,
@@ -48,4 +46,3 @@ export function useSendContact() {
 
   return { mutate, isError, error, isSuccess, reset };
 }
-

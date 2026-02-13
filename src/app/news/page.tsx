@@ -29,7 +29,8 @@ interface NewsProps {
   newsData?: NewsArticle[];
 }
 
-export default function News({ newsData = data }: NewsProps) {
+export default function News() {
+  const newsData = data as NewsArticle[];
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [articles, setArticles] = useState<NewsArticle[]>([]);

@@ -1,5 +1,4 @@
 "use client";
-
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { data } from "@/data/news";
@@ -9,7 +8,7 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface NewsArticle {
+export interface NewsArticle {
   id: number;
   title: string;
   slug: string;
@@ -20,27 +19,26 @@ interface NewsArticle {
   featured_image: string | null;
   created_at: string;
   updated_at: string;
-  published_at: string | null;
+  published_at: string;
   author_name: string;
   author_email: string;
   category?: string;
 }
 
-interface NewsDetailProps {
-  newsData?: NewsArticle[];
-}
-
-export default function NewsDetail({ newsData = data }: NewsDetailProps) {
+// Remove the NewsDetailProps interface and props parameter
+export default function NewsDetail() {
   const params = useParams();
   const router = useRouter();
   const articleId = Number(params.id);
 
-  console.log(articleId, "chicken");
+  // Use data directly from import
+  const newsData = data as NewsArticle[];
 
   const [article, setArticle] = useState<NewsArticle | null>(null);
   const [relatedArticles, setRelatedArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // 
   useEffect(() => {
     // Find the article by ID
     const foundArticle = newsData.find(

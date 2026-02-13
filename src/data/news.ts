@@ -1,4 +1,6 @@
-export const data = [
+import { NewsArticle } from "@/app/news/[id]/page";
+
+export const data: NewsArticle[] = [
   {
     id: 1,
     title: "NEPN Achieves Major Milestone",
