@@ -1,15 +1,16 @@
+import AboutSection from "@/components/AboutSection";
+import ContactCTA from "@/components/ContactCTA";
+import CounterSection from "@/components/Counter";
+import CTABanner from "@/components/CTABanner";
+import FAQSection from "@/components/FAQSection";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import AboutSection from "@/components/AboutSection";
-import ValuesSection from "@/components/ValuesSection";
-import SustainabilitySection from "@/components/SustainabilitySection";
-import CTABanner from "@/components/CTABanner";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import FAQSection from "@/components/FAQSection";
-import ContactCTA from "@/components/ContactCTA";
 import NewsSection from "@/components/NewsSection";
-import Footer from "@/components/Footer";
-import CounterSection from "@/components/Counter";
+import SustainabilitySection from "@/components/SustainabilitySection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import ValuesSection from "@/components/ValuesSection";
+import { data } from "@/data/news";
 
 export default function Home() {
   return (
@@ -28,7 +29,7 @@ export default function Home() {
       <FAQSection />
       <ContactCTA />
       <CounterSection />
-      <NewsSection />
+      <NewsSection newsData={data} />
       <Footer />
     </main>
   );

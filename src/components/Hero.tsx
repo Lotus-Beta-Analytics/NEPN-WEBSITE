@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
+// prop need to change
 const heroSlides = [
   {
     title: "Powering Progress through\nExploration",

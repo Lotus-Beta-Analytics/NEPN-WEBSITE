@@ -1,87 +1,65 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const newsItems = [
-  {
-    title: "Safety First Initiative",
-    description:
-      "Our commitment to maintaining the highest safety standards across all operations continues to set industry benchmarks.",
-    image: "/images/safety-pic-lol.jpeg",
-    date: "January 10, 2026",
-    category: "Safety",
-  },
-  {
-    title: "Environmental Excellence",
-    description:
-      "NEPN achieves new milestones in environmental stewardship and sustainable energy practices.",
-    image: "/images/nepn-images-four.jpg",
-    date: "January 8, 2026",
-    category: "Sustainability",
-  },
-  {
-    title: "Community Development",
-    description:
-      "Expanding our CSR initiatives to empower more communities across Nigeria.",
-    image: "/images/nepn.jpg",
-    date: "January 5, 2026",
-    category: "CSR",
-  },
-  {
-    title: "Innovation in Energy",
-    description:
-      "Implementing cutting-edge technology to enhance operational efficiency and reduce environmental impact.",
-    image: "/images/nepn-image-three.jpg",
-    date: "January 3, 2026",
-    category: "Technology",
-  },
-  {
-    title: "Partnership Expansion",
-    description:
-      "Forging new strategic partnerships to drive growth and sustainability in the energy sector.",
-    image: "/images/partnerships.jpg",
-    date: "December 28, 2025",
-    category: "Partnerships",
-  },
-  {
-    title: "Operational Excellence",
-    description:
-      "Achieving record production levels while maintaining our commitment to environmental responsibility.",
-    image: "/images/nepn-images-four.jpg",
-    date: "December 25, 2025",
-    category: "Operations",
-  },
-];
+interface NewsArticle {
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  status: string;
+  author_id: number;
+  featured_image: string | null;
+  created_at: string;
+  updated_at: string;
+  published_at: string | null;
+  author_name: string;
+  author_email: string;
+  category?: string; // Optional category field
+}
 
-export default function NewsSection() {
+interface NewsSectionProps {
+  newsData?: NewsArticle[];
+}
+
+export default function NewsSection({ newsData = [] }: NewsSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 2;
 
+  // Filter only published articles and take first 4
+  const publishedNews = newsData
+    .filter((article) => article.status === "published")
+    .slice(0, 4);
+
   // Auto-advance carousel
   useEffect(() => {
+    if (publishedNews.length === 0) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) =>
-        prev + itemsPerPage >= newsItems.length ? 0 : prev + itemsPerPage,
+        prev + itemsPerPage >= publishedNews.length ? 0 : prev + itemsPerPage,
       );
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [publishedNews.length]);
 
-  const totalPages = Math.ceil(newsItems.length / itemsPerPage);
+  const totalPages = Math.ceil(publishedNews.length / itemsPerPage);
   const currentPage = Math.floor(currentIndex / itemsPerPage);
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
-      prev + itemsPerPage >= newsItems.length ? 0 : prev + itemsPerPage,
+      prev + itemsPerPage >= publishedNews.length ? 0 : prev + itemsPerPage,
     );
   };
 
   const handlePrev = () => {
     setCurrentIndex((prev) =>
       prev === 0
-        ? Math.floor((newsItems.length - 1) / itemsPerPage) * itemsPerPage
+        ? Math.floor((publishedNews.length - 1) / itemsPerPage) * itemsPerPage
         : prev - itemsPerPage,
     );
   };
@@ -90,10 +68,29 @@ export default function NewsSection() {
     setCurrentIndex(pageIndex * itemsPerPage);
   };
 
-  const visibleItems = newsItems.slice(
+  const visibleItems = publishedNews.slice(
     currentIndex,
     currentIndex + itemsPerPage,
   );
+
+  // Format date to readable format
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // Get placeholder image if no featured_image
+  const getImageUrl = (article: NewsArticle) => {
+    return article.featured_image || "/images/placeholder-news.jpg";
+  };
+
+  if (publishedNews.length === 0) {
+    return null; // Don't show section if no published news
+  }
 
   return (
     <section className="py-16 lg:py-24 bg-white mb-16">
@@ -111,6 +108,29 @@ export default function NewsSection() {
                 announcements, industry trends, project milestones, and thought
                 leadership
               </p>
+
+              {/* View All Button */}
+              <Link
+                href="/news"
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-semibold transition-colors group mb-8"
+              >
+                VIEW ALL NEWS
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  className="transition-transform group-hover:translate-x-1"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8h10M9 4l4 4-4 4"
+                  />
+                </svg>
+              </Link>
 
               {/* Navigation Arrows - Desktop */}
               <div className="hidden lg:flex items-center gap-4">
@@ -162,39 +182,44 @@ export default function NewsSection() {
           <div className="lg:col-span-8">
             <div className="relative overflow-hidden">
               <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-                {visibleItems.map((item, index) => (
-                  <div
-                    key={currentIndex + index}
+                {visibleItems.map((article) => (
+                  <Link
+                    key={article.id}
+                    href={`/news/${article.id}`}
                     className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                   >
                     {/* Image */}
                     <div className="relative h-56 lg:h-64 overflow-hidden group">
                       <Image
-                        src={item.image}
-                        alt={item.title}
+                        src={getImageUrl(article)}
+                        alt={article.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       {/* Category Badge */}
-                      <div className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-semibold">
-                        {item.category}
-                      </div>
+                      {article.category && (
+                        <div className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-semibold">
+                          {article.category}
+                        </div>
+                      )}
                     </div>
 
                     {/* Content */}
                     <div className="p-6 lg:p-8">
-                      {/* Date */}
-                      <p className="text-xs text-gray-500 mb-3 font-medium">
-                        {item.date}
-                      </p>
+                      {/* Date & Author */}
+                      <div className="flex items-center gap-2 text-xs text-gray-500 mb-3 font-medium">
+                        <span>{formatDate(article.created_at)}</span>
+                        <span>•</span>
+                        <span>{article.author_name}</span>
+                      </div>
 
-                      <h3 className="text-xl lg:text-2xl font-semibold text-black mb-4 hover:text-blue-600 transition-colors">
-                        {item.title}
+                      <h3 className="text-xl lg:text-2xl font-semibold text-black mb-4 hover:text-blue-600 transition-colors line-clamp-2">
+                        {article.title}
                       </h3>
-                      <p className="text-sm lg:text-base text-black/70 leading-relaxed mb-6">
-                        {item.description}
+                      <p className="text-sm lg:text-base text-black/70 leading-relaxed mb-6 line-clamp-3">
+                        {article.excerpt}
                       </p>
-                      <button className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-semibold transition-colors group">
+                      <span className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-semibold transition-colors group">
                         READ MORE
                         <svg
                           width="16"
@@ -211,28 +236,30 @@ export default function NewsSection() {
                             d="M3 8h10M9 4l4 4-4 4"
                           />
                         </svg>
-                      </button>
+                      </span>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
 
             {/* Pagination Dots */}
-            <div className="flex items-center justify-center gap-2 mt-8">
-              {[...Array(totalPages)].map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToPage(index)}
-                  className={`h-3 rounded-full transition-all duration-300 ${
-                    index === currentPage
-                      ? "bg-blue-600 w-8 shadow-md"
-                      : "bg-gray-300 w-3 hover:bg-gray-400"
-                  }`}
-                  aria-label={`Go to page ${index + 1}`}
-                />
-              ))}
-            </div>
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-8">
+                {[...Array(totalPages)].map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToPage(index)}
+                    className={`h-3 rounded-full transition-all duration-300 ${
+                      index === currentPage
+                        ? "bg-blue-600 w-8 shadow-md"
+                        : "bg-gray-300 w-3 hover:bg-gray-400"
+                    }`}
+                    aria-label={`Go to page ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* Navigation Arrows - Mobile */}
             <div className="flex lg:hidden items-center justify-center gap-4 mt-6">

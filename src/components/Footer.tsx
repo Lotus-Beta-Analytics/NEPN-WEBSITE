@@ -1,7 +1,35 @@
-import Link from "next/link";
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+
+interface FormData {
+  // username: string;
+  email: string;
+}
 
 export default function Footer() {
+  // const MyComponent = () => {
+  const [formData, setFormData] = useState<FormData>({
+    // username: '',
+    email: "",
+  });
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // const { mutate: sendEmail } = useSendEmails();
+
+  const handleSubmit = () => {
+    // sendEmail(formData);
+  };
   return (
     <footer className="relative bg-gray-900 text-gray-400">
       <div className="absolute top-[-160px] left-0 right-0 z-10">
@@ -178,10 +206,16 @@ export default function Footer() {
               <div className="flex gap-2">
                 <input
                   type="email"
+                  value={formData.email}
+                  name="email"
                   placeholder="Email"
                   className="flex-1 bg-transparent border border-white/60 rounded-[5px] px-4 py-2.5 text-white placeholder:text-white/60 focus:outline-none focus:border-white transition-colors"
+                  onChange={handleChange}
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 p-3 rounded-[5px] transition-colors">
+                <button
+                  onClick={handleSubmit}
+                  className="bg-blue-600 hover:bg-blue-700 p-3 rounded-[5px] transition-colors"
+                >
                   <svg width="16" height="15" viewBox="0 0 16 15" fill="white">
                     <path d="M0 7.5L16 0L8 15L7 7.5H0Z" />
                   </svg>

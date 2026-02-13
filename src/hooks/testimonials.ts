@@ -1,26 +1,27 @@
 // import { queryKeys } from "../react-query/constants";
-import { axiosInstance } from "../axios-instance";
 import { useQuery } from "@tanstack/react-query";
+import { axiosInstance } from "../axios-instance";
 
-async function getAboutUs() {
+async function getTestimonials() {
   try {
     const res = await axiosInstance({
-      url: "/about",
+      url: "testimonial",
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
 
+    console.log(res?.data.data);
     return res?.data?.data;
   } catch (error) {}
 }
 
-export function useAbout() {
-  const fallback = [];
+export function useGetTestimonials() {
+  const fallback: any = [];
   const { data = fallback, isLoading } = useQuery({
-    queryKey: ["about"],
-    queryFn: getAboutUs,
+    queryKey: ["testimonials"],
+    queryFn: getTestimonials,
   });
   return { data, isLoading };
 }

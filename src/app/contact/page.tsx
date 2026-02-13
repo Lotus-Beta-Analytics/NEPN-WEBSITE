@@ -1,9 +1,9 @@
 "use client";
-import { motion } from "motion/react";
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
-import { useState } from "react";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
+import { motion } from "motion/react";
+import { useState } from "react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -15,10 +15,13 @@ export default function ContactPage() {
     message: "",
   });
 
+  // const {mutate} = useSendContact();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
     console.log("Form submitted:", formData);
+    // mutate(formData)
     alert("Thank you for contacting NEPN. We will get back to you soon!");
   };
 

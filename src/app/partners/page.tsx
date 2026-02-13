@@ -1,19 +1,23 @@
 "use client";
 
-import { motion } from "motion/react";
-import {
-  Handshake,
-  Globe,
-  TrendingUp,
-  Award,
-  Users,
-  Target,
-} from "lucide-react";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { getNews } from "@/hooks/news";
+import {
+  Award,
+  Globe,
+  Handshake,
+  Target,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 
 export default function PartnersPage() {
+  const x = getNews();
+
+  console.log(x, "jeez");
   const partnerTypes = [
     {
       icon: <Globe className="w-12 h-12" />,
