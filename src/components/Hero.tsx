@@ -1,9 +1,28 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useCarousel } from "@/hooks/carousel";
 
-// prop need to change
-const heroSlides = [
+const CMS_ORIGIN = "https://cms.networkeandp.com";
+
+const isAbsoluteUrl = (value: string) => /^https?:\/\//i.test(value);
+
+const normalizeCmsAssetUrl = (value?: string) => {
+  if (!value) return "";
+  const raw = String(value).trim();
+  if (!raw) return "";
+  if (isAbsoluteUrl(raw)) return raw;
+
+  const clean = raw.startsWith("/") ? raw : `/${raw}`;
+  return `${CMS_ORIGIN}${clean}`;
+};
+
+const inferMediaType = (src: string, incomingType?: string) => {
+  if (incomingType) return incomingType.toLowerCase();
+  return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src) ? "video" : "image";
+};
+
+/* const heroFallbackSlides = [
   {
     title: "Powering Progress through\nExploration",
     description:
@@ -25,20 +44,55 @@ const heroSlides = [
     mediaType: "image", // Solid color background
     mediaSrc: "/images/hero-bg.jpg",
   },
-];
+]; */
 
 export default function Hero() {
+  const { data: carouselData = [] } = useCarousel();
+  const heroSlides = useMemo(() => {
+    if (!Array.isArray(carouselData) || carouselData.length === 0) return [];
+
+    const mappedSlides = carouselData
+      .map((slide: any) => {
+        const rawSrc =
+          slide?.mediaSrc ||
+          slide?.media_src ||
+          slide?.image ||
+          slide?.image_url ||
+          slide?.video ||
+          slide?.video_url ||
+          "";
+        const mediaSrc = normalizeCmsAssetUrl(rawSrc);
+
+        return {
+          title: slide?.title || slide?.heading || "",
+          description: slide?.description || slide?.body || "",
+          mediaType: inferMediaType(mediaSrc, slide?.mediaType || slide?.media_type),
+          mediaSrc,
+        };
+      })
+      .filter((slide: any) => slide.title || slide.description || slide.mediaSrc);
+
+    return mappedSlides;
+  }, [carouselData]);
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    if (heroSlides.length <= 1) return;
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 10000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [heroSlides]);
 
   const router = useRouter();
+  const activeSlide = heroSlides[currentSlide];
+
+  if (!activeSlide) {
+    return null;
+  }
   return (
     <section className="relative h-[600px] lg:h-[700px] w-full overflow-hidden">
       {/* Background Media - with transition */}
@@ -87,10 +141,10 @@ export default function Hero() {
           {/* More Transparent Glass Card with better text contrast */}
           <div className="backdrop-blur-sm  rounded-[20px] p-8 lg:p-12 text-center shadow-2xl border border-white/10">
             <h1 className="text-4xl sm:text-3xl lg:text-5xl font-bold text-white mb-6 whitespace-pre-line leading-[3rem] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-              {heroSlides[currentSlide].title}
+              {activeSlide.title}
             </h1>
             <p className="text-base lg:text-lg text-white mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-medium">
-              {heroSlides[currentSlide].description}
+              {activeSlide.description}
             </p>
             <button
               onClick={() => router.push("/about")}
@@ -117,50 +171,52 @@ export default function Hero() {
         </div>
       </div>
 
-      <button
-        onClick={() =>
-          setCurrentSlide(
-            (prev) => (prev - 1 + heroSlides.length) % heroSlides.length,
-          )
-        }
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all z-10"
-        aria-label="Previous slide"
-      >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </button>
-      <button
-        onClick={() =>
-          setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
-        }
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all z-10"
-        aria-label="Next slide"
-      >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button>
+      {heroSlides.length > 1 && (
+        <>
+          <button
+            onClick={() =>
+              setCurrentSlide(
+                (prev) => (prev - 1 + heroSlides.length) % heroSlides.length,
+              )
+            }
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all z-10"
+            aria-label="Previous slide"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all z-10"
+            aria-label="Next slide"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </>
+      )}
 
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <svg

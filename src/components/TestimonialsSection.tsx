@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
+import { useGetTestimonials } from "@/hooks/testimonials";
 
-const testimonials = [
+/* const testimonials = [
   {
     quote:
       "NEPN operates with a strong sense of responsibility and financial discipline. Their processes are clear, structured, and dependable.",
@@ -41,20 +42,37 @@ const testimonials = [
     name: "Nnochiri Ogbonna",
     role: "",
   },
-];
+]; */
 
 export default function TestimonialsSection() {
+  const { data: testimonialsData = [] } = useGetTestimonials();
+  const testimonials = Array.isArray(testimonialsData)
+    ? testimonialsData
+        .map((item: any) => ({
+          quote: item?.quote || item?.content || item?.testimonial || "",
+          name: item?.name || item?.author_name || "NEPN Team",
+          role: item?.role || item?.position || "",
+        }))
+        .filter((item) => item.quote)
+    : [];
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   // Auto switch every 5 seconds
   useEffect(() => {
+    if (testimonials.length <= 2) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 2) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
+
+  if (testimonials.length === 0) {
+    return null;
+  }
 
   // Get the two testimonials to show
   const visibleTestimonials = [

@@ -10,7 +10,6 @@ import NewsSection from "@/components/NewsSection";
 import SustainabilitySection from "@/components/SustainabilitySection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ValuesSection from "@/components/ValuesSection";
-import { data } from "@/data/news";
 
 export default function Home() {
   return (
@@ -29,7 +28,8 @@ export default function Home() {
       <FAQSection />
       <ContactCTA />
       <CounterSection />
-      <NewsSection newsData={data} />
+      {/* <NewsSection newsData={data} /> */}
+      <NewsSection />
       <Footer />
     </main>
   );

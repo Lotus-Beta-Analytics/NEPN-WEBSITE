@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useFAQ } from "@/hooks/faq";
 
-const faqs = [
+/* const faqs = [
   {
     question: "What does NEPN do?",
     answer:
@@ -30,10 +31,19 @@ const faqs = [
     answer:
       "Through responsible practices, innovation, and commitment to environmental stewardship.",
   },
-];
+]; */
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(0);
+  const { data: faqData = [] } = useFAQ();
+  const faqs = Array.isArray(faqData)
+    ? faqData
+        .map((faq: any) => ({
+          question: faq?.question || faq?.title || "",
+          answer: faq?.answer || faq?.description || "",
+        }))
+        .filter((faq) => faq.question && faq.answer)
+    : [];
 
   return (
     <section className="py-16 lg:py-24 bg-white">

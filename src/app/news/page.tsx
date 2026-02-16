@@ -2,7 +2,7 @@
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { data } from "@/data/news";
+import { useGetNews } from "@/hooks/news";
 import { ArrowRight, Calendar, Search, User } from "lucide-react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
@@ -25,20 +25,20 @@ interface NewsArticle {
   category?: string;
 }
 
-interface NewsProps {
-  newsData?: NewsArticle[];
-}
-
 export default function News() {
-  const newsData = data as NewsArticle[];
+  // const newsData = data as NewsArticle[];
+  const { data: newsData = [], isLoading } = useGetNews();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [articles, setArticles] = useState<NewsArticle[]>([]);
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   // Initialize with published articles
   useEffect(() => {
+    if (!Array.isArray(newsData)) {
+      setArticles([]);
+      return;
+    }
     const publishedArticles = newsData.filter(
       (article) => article.status === "published",
     );
@@ -161,6 +161,12 @@ export default function News() {
           </div>
         </div>
       </section>
+
+      {isLoading && (
+        <section className="py-12 container mx-auto px-4">
+          <p className="text-gray-600">Loading news...</p>
+        </section>
+      )}
 
       {/* Featured News */}
       {featuredNews && (

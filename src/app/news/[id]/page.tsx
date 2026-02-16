@@ -1,12 +1,12 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { data } from "@/data/news";
+import { useGetNews } from "@/hooks/news";
 import { ArrowLeft, Calendar, Clock, Share2, User } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 export interface NewsArticle {
   id: number;
@@ -31,38 +31,30 @@ export default function NewsDetail() {
   const router = useRouter();
   const articleId = Number(params.id);
 
-  // Use data directly from import
-  const newsData = data as NewsArticle[];
+  // const newsData = data as NewsArticle[];
+  const { data: newsData = [], isLoading } = useGetNews();
 
-  const [article, setArticle] = useState<NewsArticle | null>(null);
-  const [relatedArticles, setRelatedArticles] = useState<NewsArticle[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  // 
-  useEffect(() => {
-    // Find the article by ID
-    const foundArticle = newsData.find(
-      (item) => item.id === articleId && item.status === "published",
+  const article = useMemo(() => {
+    if (!Array.isArray(newsData)) return null;
+    return (
+      newsData.find((item: NewsArticle) => {
+        const itemId = Number(item.id);
+        return itemId === articleId && item.status === "published";
+      }) || null
     );
-
-    if (foundArticle) {
-      setArticle(foundArticle);
-
-      // Get related articles (same category, different ID, max 3)
-      const related = newsData
-        .filter(
-          (item) =>
-            item.status === "published" &&
-            item.id !== articleId &&
-            item.category === foundArticle.category,
-        )
-        .slice(0, 3);
-
-      setRelatedArticles(related);
-    }
-
-    setLoading(false);
   }, [articleId, newsData]);
+
+  const relatedArticles = useMemo(() => {
+    if (!article || !Array.isArray(newsData)) return [];
+    return newsData
+      .filter(
+        (item: NewsArticle) =>
+          item.status === "published" &&
+          Number(item.id) !== articleId &&
+          item.category === article.category,
+      )
+      .slice(0, 3);
+  }, [article, articleId, newsData]);
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -101,7 +93,7 @@ export default function NewsDetail() {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="bg-white min-h-screen">
         <Header />

@@ -22,18 +22,20 @@ interface NewsArticle {
   category?: string; // Optional category field
 }
 
-interface NewsSectionProps {
-  newsData?: NewsArticle[];
-}
+// interface NewsSectionProps {
+//   newsData?: NewsArticle[];
+// }
 
-export default function NewsSection({ newsData = [] }: NewsSectionProps) {
+export default function NewsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 2;
 
-  const {data}  = useGetNews();
+  const { data: fetchedNews = [] } = useGetNews();
+  // const sourceNews = Array.isArray(fetchedNews) && fetchedNews.length > 0 ? fetchedNews : newsData;
+  const sourceNews = Array.isArray(fetchedNews) ? fetchedNews : [];
 
   // Filter only published articles and take first 4
-  const publishedNews = newsData
+  const publishedNews = sourceNews
     .filter((article) => article.status === "published")
     .slice(0, 4);
 
