@@ -1,5 +1,6 @@
 "use client";
 
+import { useGetNews } from "@/hooks/news";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -28,6 +29,8 @@ interface NewsSectionProps {
 export default function NewsSection({ newsData = [] }: NewsSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 2;
+
+  const {data}  = useGetNews();
 
   // Filter only published articles and take first 4
   const publishedNews = newsData

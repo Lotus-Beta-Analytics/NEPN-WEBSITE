@@ -12,8 +12,8 @@ export async function getNews() {
       },
     });
 
-    console.log(res?.data.data);
-    return res?.data?.data;
+    console.log(res?.data?.posts, "boy");
+    return res?.data?.posts;
   } catch (error) {}
 }
 

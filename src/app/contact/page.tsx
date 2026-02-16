@@ -1,6 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { useSendContact } from "@/hooks/contact";
 import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -15,13 +16,13 @@ export default function ContactPage() {
     message: "",
   });
 
-  // const {mutate} = useSendContact();
+  const { mutate } = useSendContact();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
     console.log("Form submitted:", formData);
-    // mutate(formData)
+    mutate(formData);
     alert("Thank you for contacting NEPN. We will get back to you soon!");
   };
 
