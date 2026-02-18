@@ -1,5 +1,6 @@
 "use client";
 
+import { useSendEmails } from "@/hooks/email";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -25,10 +26,19 @@ export default function Footer() {
     }));
   };
 
-  // const { mutate: sendEmail } = useSendEmails();
+  const { mutate: sendEmail, isPending } = useSendEmails();
 
   const handleSubmit = () => {
-    // sendEmail(formData);
+    sendEmail(formData, {
+      onSuccess: () => {
+        setFormData({ email: "" });
+
+        console.log("Form cleared successfully!");
+      },
+      onError: (error) => {
+        console.error("Keep the data, something went wrong:", error);
+      },
+    });
   };
   return (
     <footer className="relative bg-gray-900 text-gray-400">
@@ -214,11 +224,38 @@ export default function Footer() {
                 />
                 <button
                   onClick={handleSubmit}
-                  className="bg-blue-600 hover:bg-blue-700 p-3 rounded-[5px] transition-colors"
+                  disabled={isPending}
+                  className={`${isPending ? "bg-gray-200" : "bg-blue-700"} hover:bg-blue-700 p-3 rounded-[5px] transition-colors`}
                 >
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="white">
-                    <path d="M0 7.5L16 0L8 15L7 7.5H0Z" />
-                  </svg>
+                  {isPending ? (
+                    <svg
+                      className="animate-spin"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                    >
+                      <circle
+                        cx="8"
+                        cy="8"
+                        r="6"
+                        stroke="#3b82f6"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeDasharray="28"
+                        strokeDashoffset="10"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="16"
+                      height="15"
+                      viewBox="0 0 16 15"
+                      fill="white"
+                    >
+                      <path d="M0 7.5L16 0L8 15L7 7.5H0Z" />
+                    </svg>
+                  )}
                 </button>
               </div>
             </div>

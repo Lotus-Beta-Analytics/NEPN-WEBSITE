@@ -1,6 +1,5 @@
 "use client";
 
-import { useGetNews } from "@/hooks/news";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -26,20 +25,18 @@ interface NewsSectionProps {
   newsData?: NewsArticle[];
 }
 
-export default function NewsSection({ newsData = [] }: NewsSectionProps) {
+export default function NewsSection({ newsData }: NewsSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 2;
 
-  const {data}  = useGetNews();
-
   // Filter only published articles and take first 4
-  const publishedNews = newsData
-    .filter((article) => article.status === "published")
-    .slice(0, 4);
+  const publishedNews =
+    newsData?.filter((article) => article.status === "published").slice(0, 4) ??
+    [];
 
   // Auto-advance carousel
   useEffect(() => {
-    if (publishedNews.length === 0) return;
+    if (publishedNews?.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) =>
@@ -96,7 +93,7 @@ export default function NewsSection({ newsData = [] }: NewsSectionProps) {
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-white mb-16">
+    <section className="py-16 lg:py-24 bg-white mb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left Side - Heading */}
@@ -194,7 +191,7 @@ export default function NewsSection({ newsData = [] }: NewsSectionProps) {
                     {/* Image */}
                     <div className="relative h-56 lg:h-64 overflow-hidden group">
                       <Image
-                        src={getImageUrl(article)}
+                        src={getImageUrl(article) || ""}
                         alt={article.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110"

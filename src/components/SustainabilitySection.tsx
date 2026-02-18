@@ -1,70 +1,192 @@
 "use client";
-import { motion } from "motion/react";
-import { useRouter } from "next/navigation";
+import { motion, useInView } from "motion/react";
+import Link from "next/link";
+import { useRef } from "react";
 
 export default function SustainabilitySection() {
-  const router = useRouter();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
   return (
-    <section className="relative py-16 lg:py-24 bg-gray-50 overflow-hidden">
+    <section
+      ref={ref}
+      style={{
+        position: "relative",
+        padding: "120px 24px",
+        backgroundColor: "#f5f5f7",
+        overflow: "hidden",
+      }}
+    >
+      {/* ── Background circles ────────────────────────────────────────── */}
       <motion.div
-        // style={ball}
-        className="absolute top-1 left-[-500px] -translate-x-1/2 -translate-y-1/2 z-0"
-        initial={{ opacity: 0, scale: 0.5 }}
-        // animate={}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 0.2,
-          delay: 1,
-          ease: [0, 0.71, 0.2, 1.01],
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "-320px",
+          transform: "translateY(-50%)",
+          width: "700px",
+          height: "700px",
+          borderRadius: "50%",
+          border: "1px solid rgba(0,0,0,0.06)",
+          pointerEvents: "none",
+          zIndex: 0,
         }}
       >
-        {/* Outer Circle */}
-        <div className="w-[840px] h-[840px] rounded-full bg-[#2828280A] border-[#2828280A]"></div>
-
-        {/* Inner Circle */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[640px] h-[640px] rounded-full border-[#2828280A]"></div>
+        {/* inner white circle */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "520px",
+            height: "520px",
+            borderRadius: "50%",
+            backgroundColor: "rgba(255,255,255,0.6)",
+            border: "1px solid rgba(0,0,0,0.04)",
+          }}
+        />
       </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Badge with O shape behind */}
-        <div className="flex justify-center mb-8 relative">
-          {/* Big O Shape */}
-          <div className="absolute -right-6 top-1/2 -translate-y-1/2 w-28 h-28 rounded-full border-2 border-gray-400/20 opacity-30 z-0" />
+      {/* ── Content ───────────────────────────────────────────────────── */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "860px",
+          margin: "0 auto",
+          textAlign: "center",
+        }}
+      >
+        {/* Eyebrow label */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+          style={{ marginBottom: "24px" }}
+        >
+          <span
+            style={{
+              display: "inline-block",
+              fontSize: "13px",
+              fontWeight: "600",
+              letterSpacing: "0.06em",
+              color: "#86868b",
+              textTransform: "uppercase",
+            }}
+          >
+            Sustainability
+          </span>
+        </motion.div>
 
-          <div className="px-8 py-3 relative z-10">
-            <span className="relative text-gray-700 text-xl lg:text-2xl font-semibold">
-              <span className="relative z-10">Su</span>
-              <span className="relative z-10">stainability</span>
-
-              {/* small circle behind Su (optional subtle detail) */}
-              <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#3d3d3d0a]  z-0"></span>
-            </span>
+        {/* Heading — two-line wipe */}
+        <div style={{ marginBottom: "28px" }}>
+          <div style={{ overflow: "hidden" }}>
+            <motion.h2
+              initial={{ y: "110%" }}
+              animate={isInView ? { y: 0 } : {}}
+              transition={{
+                duration: 0.9,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.18,
+              }}
+              style={{
+                margin: 0,
+                fontSize: "clamp(40px, 7vw, 86px)",
+                fontWeight: "700",
+                letterSpacing: "-0.04em",
+                lineHeight: 1.05,
+                color: "#1d1d1f",
+              }}
+            >
+              Sustainability at <span style={{ color: "#0000fe" }}>NEPN</span>
+            </motion.h2>
           </div>
         </div>
 
-        {/* Heading */}
-        <h2 className="text-5xl lg:text-[90px] font-semibold text-center mb-8 leading-tight">
-          <span className="text-black">Sustainability at </span>
-          <span className="text-nepn-blue">NEPN</span>
-        </h2>
+        {/* Divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={isInView ? { scaleX: 1 } : {}}
+          transition={{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.38,
+          }}
+          style={{
+            height: "1px",
+            backgroundColor: "rgba(0,0,0,0.1)",
+            maxWidth: "480px",
+            margin: "0 auto 32px",
+            transformOrigin: "center",
+          }}
+        />
 
-        {/* Description */}
-        <p className="text-black/80 text-lg lg:text-xl text-center max-w-4xl mx-auto leading-relaxed lg:leading-[40px] mb-12">
+        {/* Body */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.44 }}
+          style={{
+            fontSize: "clamp(16px, 2vw, 19px)",
+            color: "#424245",
+            lineHeight: 1.75,
+            marginBottom: "48px",
+            fontWeight: "400",
+          }}
+        >
           At NEPN, sustainability is more than a goal — it is a fundamental part
           of who we are and how we operate. We are deeply committed to
           responsible practices that promote long-term value for our
           stakeholders, our host communities, and the environment.
-        </p>
+        </motion.p>
 
-        {/* CTA Button */}
-        <div className="flex justify-center">
-          <button
-            className="bg-[#0000FE] hover:bg-nepn-blue text-white px-10 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
-            onClick={() => router.push("/sustainability")}
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.54 }}
+        >
+          <Link
+            href="/sustainability"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              backgroundColor: "#0000fe",
+              color: "#fff",
+              padding: "14px 28px",
+              borderRadius: "980px",
+              fontSize: "14px",
+              fontWeight: "600",
+              letterSpacing: "0.01em",
+              textDecoration: "none",
+              transition: "background-color 0.2s ease, transform 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#0000cc";
+              e.currentTarget.style.transform = "scale(1.03)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "#0000fe";
+              e.currentTarget.style.transform = "scale(1)";
+            }}
           >
-            ABOUT OUR SUSTAINABILITY
-          </button>
-        </div>
+            Our Sustainability
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M2 7h10M8 3l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

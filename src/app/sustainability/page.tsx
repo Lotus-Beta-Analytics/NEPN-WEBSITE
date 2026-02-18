@@ -1,19 +1,19 @@
 "use client";
 
-import { motion } from "motion/react";
-import {
-  Leaf,
-  Shield,
-  Heart,
-  Recycle,
-  Droplet,
-  Wind,
-  Factory,
-  Users,
-} from "lucide-react";
-import Image from "next/image";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import {
+  Droplet,
+  Factory,
+  Heart,
+  Leaf,
+  Recycle,
+  Shield,
+  Users,
+  Wind,
+} from "lucide-react";
+import { motion } from "motion/react";
+import Image from "next/image";
 
 export default function Sustainability() {
   const ehsPillars = [

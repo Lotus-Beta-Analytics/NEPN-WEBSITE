@@ -12,8 +12,8 @@ async function getCarousel() {
       },
     });
 
-    console.log(res?.data.data);
-    return res?.data?.data;
+    console.log(res?.data?.sliders, "josh");
+    return res?.data?.sliders;
   } catch (error) {}
 }
 

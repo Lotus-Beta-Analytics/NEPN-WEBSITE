@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useGetTestimonials } from "@/hooks/testimonials";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
-const testimonials = [
+// Fallback testimonials in case API fails
+const fallbackTestimonials = [
   {
     quote:
       "NEPN operates with a strong sense of responsibility and financial discipline. Their processes are clear, structured, and dependable.",
@@ -37,16 +39,28 @@ const testimonials = [
   },
   {
     quote:
-      "The consistency and integrity of NEPN’s work make them a trusted partner across different initiatives.",
+      "The consistency and integrity of NEPN's work make them a trusted partner across different initiatives.",
     name: "Nnochiri Ogbonna",
     role: "",
   },
 ];
 
 export default function TestimonialsSection() {
+  const { data: apiTestimonials } = useGetTestimonials();
   const [currentIndex, setCurrentIndex] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  // Transform API data to match component structure
+  const testimonials = apiTestimonials?.length
+    ? apiTestimonials.map((item: any) => ({
+        quote: item.description,
+        name: item.name,
+        role: item.job_title,
+        image: item.image,
+        company: item.company_name,
+      }))
+    : fallbackTestimonials;
 
   // Auto switch every 5 seconds
   useEffect(() => {
@@ -54,13 +68,16 @@ export default function TestimonialsSection() {
       setCurrentIndex((prev) => (prev + 2) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
 
   // Get the two testimonials to show
   const visibleTestimonials = [
     testimonials[currentIndex],
     testimonials[(currentIndex + 1) % testimonials.length],
   ];
+
+  // Calculate total number of testimonials for stats
+  const totalTestimonials = testimonials.length;
 
   return (
     <section ref={ref} className="relative bg-gray-50 px-12">
@@ -77,8 +94,8 @@ export default function TestimonialsSection() {
                     at our people and partner say
                   </span>
 
-                  {/* small circle behind Su (optional subtle detail) */}
-                  <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#3d3d3d0a]  z-0"></span>
+                  {/* small circle behind Wh */}
+                  <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#3d3d3d0a] z-0"></span>
                 </span>
               </div>
 
@@ -127,14 +144,16 @@ export default function TestimonialsSection() {
                   </p>
 
                   <div className="flex items-center gap-4 mt-auto">
-                    {/* <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-lg"> */}
-                    {/* <Image
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        fill
-                        className="object-cover"
-                      /> */}
-                    {/* </div> */}
+                    {testimonial.image && (
+                      <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                        <Image
+                          src={testimonial.image || ""}
+                          alt={testimonial.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
                     <div>
                       <p className="text-[15px] font-medium text-black">
                         {testimonial.name}
@@ -142,6 +161,11 @@ export default function TestimonialsSection() {
                       <p className="text-[13px] text-black/70 italic font-light">
                         {testimonial.role}
                       </p>
+                      {testimonial.company && (
+                        <p className="text-[12px] text-black/50">
+                          {testimonial.company}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -217,7 +241,7 @@ export default function TestimonialsSection() {
                   transition={{ delay: 1.3, duration: 0.5 }}
                 >
                   <div className="text-5xl lg:text-6xl font-semibold mb-2">
-                    20+
+                    {totalTestimonials}+
                   </div>
                 </motion.div>
               </div>

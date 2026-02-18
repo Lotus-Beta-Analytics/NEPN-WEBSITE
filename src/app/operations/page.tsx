@@ -1,17 +1,10 @@
 "use client";
 
-import { motion } from "motion/react";
-import {
-  MapPin,
-  Layers,
-  Activity,
-  TrendingUp,
-  Zap,
-  Settings,
-} from "lucide-react";
-import Image from "next/image";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { Activity, Layers, MapPin, Settings, Zap } from "lucide-react";
+import { motion } from "motion/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function Operations() {
@@ -115,7 +108,7 @@ export default function Operations() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "url(images/nepn_landing_page.webp)",
+            backgroundImage: "url(images/nepn_landing_page.jpg)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -135,15 +128,8 @@ export default function Operations() {
             </h1>
             <p className="text-xl mb-8">
               World-class facilities and cutting-edge technology powering
-              Nigeriav&apos;s energy sector
+              Nigeria&apos;s energy sector
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#0000fe] text-white px-8 py-4 rounded-lg font-semibold"
-            >
-              Explore Our Facilities
-            </motion.button>
           </motion.div>
         </div>
       </motion.section>

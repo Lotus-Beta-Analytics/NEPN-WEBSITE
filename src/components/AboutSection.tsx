@@ -1,121 +1,135 @@
 "use client";
 import { motion, useInView } from "motion/react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useRef } from "react";
 
 export default function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const router = useRouter();
-
   return (
     <section
       ref={ref}
-      className="relative bg-nepn-navy overflow-hidden px:4 md:px-12"
+      style={{
+        // backgroundColor: "", // nepn-navy
+        padding: "100px 24px",
+      }}
+      className="bg-nepn-navy"
     >
-      <div className="relative z-10 pt-24 pb-32 lg:pt-32 lg:pb-40">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-12"
-          >
-            <div className="px-4 py-3 relative z-10">
-              <span className="relative text-white text-xl lg:text-2xl font-semibold">
-                <span className="relative z-10">Wh</span>
-                <span className="relative z-10">o we are</span>
+      <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          style={{
+            margin: "0 0 48px",
+            fontSize: "12px",
+            fontWeight: "600",
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.4)",
+          }}
+        >
+          Who we are
+        </motion.p>
 
-                {/* small circle behind Su (optional subtle detail) */}
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : { scale: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3, ease: "backOut" }}
-                  className="absolute -left-3 top-[-10px] -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 z-0"
-                />
-              </span>
-            </div>
-
-            <motion.div
-              initial={{ scaleY: 0 }}
-              animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
-              transition={{ duration: 0.4, delay: 0.4 }}
-              className="hidden md:block w-px h-8 bg-white/30 mx-4"
-            />
-            <motion.span
-              initial={{ opacity: 0, x: -10 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-white text-lg lg:text-xl font-normal"
-            >
-              Learn about our
-            </motion.span>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left - Large Text */}
-            <div className="space-y-7">
-              {["History", "Mission", "Values"].map((text, index) => (
+        {/* Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "64px",
+            alignItems: "start",
+          }}
+        >
+          {/* Left — words */}
+          <div>
+            {["History", "Mission", "Values"].map((text, index) => (
+              <div key={text} style={{ overflow: "hidden" }}>
                 <motion.h2
-                  key={text}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={
-                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
-                  }
+                  initial={{ y: "105%" }}
+                  animate={isInView ? { y: 0 } : {}}
                   transition={{
-                    duration: 0.7,
-                    delay: 0.2 + index * 0.15,
-                    ease: [0.25, 0.4, 0.25, 1],
+                    duration: 0.8,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.15 + index * 0.1,
                   }}
-                  whileHover={{
-                    scale: 1.05,
-                    color: "#6d6dff",
-                    transition: { duration: 0.2 },
+                  style={{
+                    margin: 0,
+                    fontSize: "clamp(52px, 8vw, 92px)",
+                    fontWeight: "700",
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1.05,
+                    color: "#ffffff",
                   }}
-                  className="text-6xl lg:text-[96px] font-semibold text-[#4d4df9] leading-none cursor-default"
                 >
                   {text}
                 </motion.h2>
-              ))}
-            </div>
-
-            <div className="space-y-6">
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-                }
-                transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-                className="text-white/80 text-lg lg:text-xl leading-relaxed lg:leading-[40px]"
-              >
-                Welcome to Network E&P Nigeria Limited (NEPN), a fully
-                Nigerian-owned oil and gas company dedicated to promoting
-                sustainable energy solutions throughout Nigeria. Since our
-                establishment, we have been at the forefront of exploring and
-                developing the Qua Iboe field, playing a vital role in meeting
-                the nations energy needs. We take pride in maintaining the
-                highest standards of environmental stewardship and community
-                engagement....
-              </motion.p>
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ duration: 0.6, delay: 0.7 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(0, 0, 254, 0.4)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#0000FE] hover:bg-nepn-blue text-white px-8 py-3 rounded-lg text-sm font-semibold transition-colors duration-200 shadow-lg"
-                onClick={() => router.push("/about")}
-              >
-                READ MORE
-              </motion.button>
-            </div>
+              </div>
+            ))}
           </div>
+
+          {/* Right — body + CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
+            style={{ display: "flex", flexDirection: "column", gap: "28px" }}
+          >
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(15px, 1.5vw, 17px)",
+                color: "rgba(255,255,255,0.6)",
+                lineHeight: 1.8,
+              }}
+            >
+              Welcome to Network E&P Nigeria Limited (NEPN), a fully
+              Nigerian-owned oil and gas company dedicated to promoting
+              sustainable energy solutions throughout Nigeria. Since our
+              establishment, we have been at the forefront of exploring and
+              developing the Qua Iboe field, playing a vital role in meeting the
+              nation&apos;s energy needs.
+            </p>
+
+            <Link
+              href="/about"
+              style={{
+                alignSelf: "flex-start",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                backgroundColor: "#ffffff",
+                color: "#0a1628",
+                padding: "12px 24px",
+                borderRadius: "980px",
+                fontSize: "13px",
+                fontWeight: "600",
+                textDecoration: "none",
+                transition: "opacity 0.2s ease, transform 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "0.85";
+                e.currentTarget.style.transform = "scale(1.02)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            >
+              Read More
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <path
+                  d="M2 6.5h9M7 2.5l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>

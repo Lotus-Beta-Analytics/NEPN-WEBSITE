@@ -1,40 +1,45 @@
 "use client";
 
+import { useFAQ } from "@/hooks/faq";
 import { useState } from "react";
 
-const faqs = [
-  {
-    question: "What does NEPN do?",
-    answer:
-      "NEPN (Network Exploration & Production) is an energy company focused on the exploration, development, and production of oil and gas resources. We are committed to operational excellence, sustainability, and creating lasting value for our stakeholders",
-  },
-  {
-    question: "Where does NEPN operate?",
-    answer:
-      "NEPN operates primarily in Nigeria, focusing on the Qua Iboe field in OML 13.",
-  },
-  {
-    question:
-      "How does NEPN ensure the safety of its employees and the environment?",
-    answer:
-      "We maintain the highest safety standards and environmental protocols across all our operations.",
-  },
-  {
-    question:
-      "What Corporate Social Responsibility (CSR) initiatives does NEPN engage in?",
-    answer:
-      "We engage in various community development programs and environmental initiatives.",
-  },
-  {
-    question: "How does NEPN promote sustainability?",
-    answer:
-      "Through responsible practices, innovation, and commitment to environmental stewardship.",
-  },
-];
+// const faqs = [
+//   {
+//     question: "What does NEPN do?",
+//     answer:
+//       "NEPN (Network Exploration & Production) is an energy company focused on the exploration, development, and production of oil and gas resources. We are committed to operational excellence, sustainability, and creating lasting value for our stakeholders",
+//     },
+//     {
+//       question: "Where does NEPN operate?",
+//     answer:
+//     "NEPN operates primarily in Nigeria, focusing on the Qua Iboe field in OML 13.",
+//   },
+//   {
+//     question:
+//     "How does NEPN ensure the safety of its employees and the environment?",
+//     answer:
+//     "We maintain the highest safety standards and environmental protocols across all our operations.",
+//   },
+//   {
+//     question:
+//       "What Corporate Social Responsibility (CSR) initiatives does NEPN engage in?",
+//       answer:
+//       "We engage in various community development programs and environmental initiatives.",
+//   },
+//   {
+//     question: "How does NEPN promote sustainability?",
+//     answer:
+//     "Through responsible practices, innovation, and commitment to environmental stewardship.",
+//   },
+// ];
 
 export default function FAQSection() {
+  const { data: faqs } = useFAQ();
+
+  // console.
   const [openIndex, setOpenIndex] = useState(0);
 
+  // console.log("ginger", data);
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="px-12 flex flex-row justify-between place-items-center">
@@ -68,7 +73,7 @@ export default function FAQSection() {
 
           {/* Right Side - FAQ Accordion */}
           <div className="lg:col-span-8 space-y-4">
-            {faqs.map((faq, index) => (
+            {faqs?.map((faq: any, index: any) => (
               <div
                 key={index}
                 className={`rounded-2xl overflow-hidden border-2 transition-all duration-300 ${

@@ -1,9 +1,9 @@
 "use client";
 
+import { Pause, Play } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { Play, Pause } from "lucide-react";
 
 interface ValuesSectionProps {
   mediaType: "image" | "video";
@@ -110,7 +110,7 @@ export default function ValuesSection({
               <>
                 <video
                   ref={videoRef}
-                  src={mediaSrc}
+                  src={mediaSrc || ""}
                   poster={posterImage}
                   className="absolute inset-0 w-full h-full object-cover"
                   loop

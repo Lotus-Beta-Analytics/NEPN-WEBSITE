@@ -2,7 +2,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { useSendContact } from "@/hooks/contact";
-import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 
@@ -16,14 +16,27 @@ export default function ContactPage() {
     message: "",
   });
 
-  const { mutate } = useSendContact();
+  const { mutate, isPending } = useSendContact();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
-    mutate(formData);
-    alert("Thank you for contacting NEPN. We will get back to you soon!");
+    mutate(formData, {
+      onSuccess: () => {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          subject: "",
+          message: "",
+        });
+
+        console.log("Form cleared successfully!");
+      },
+      onError: (error) => {
+        console.error("Keep the data, something went wrong:", error);
+      },
+    });
   };
 
   const handleChange = (
@@ -267,10 +280,21 @@ export default function ContactPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-[#0000fe] text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-[#0000cc] transition-colors"
+                  disabled={isPending}
+                  className={`w-full px-8 py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors text-white 
+    ${
+      isPending
+        ? "bg-gray-400 cursor-not-allowed" // Grayed out state
+        : "bg-[#0000fe] hover:bg-[#0000cc] cursor-pointer" // Active state
+    }`}
                 >
-                  <Send className="w-5 h-5" />
-                  Send Message
+                  {isPending ? (
+                    <>
+                      <span className="animate-spin">⏳</span> Sending...
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
                 </motion.button>
               </form>
             </motion.div>

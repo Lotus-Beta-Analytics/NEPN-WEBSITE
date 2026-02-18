@@ -1,12 +1,13 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { data } from "@/data/news";
+import { useGetNews } from "@/hooks/news";
 import { ArrowLeft, Calendar, Clock, Share2, User } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useMemo } from "react";
 
 export interface NewsArticle {
   id: number;
@@ -25,69 +26,63 @@ export interface NewsArticle {
   category?: string;
 }
 
-// Remove the NewsDetailProps interface and props parameter
+const formatDate = (dateString: any) => {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+const calculateReadingTime = (content: any) => {
+  const words = content.split(/\s+/).length;
+  return `${Math.ceil(words / 200)} min read`;
+};
+
+const getImageUrl = (article: any) =>
+  article.featured_image || "/images/placeholder-news.jpg";
+
 export default function NewsDetail() {
   const params = useParams();
   const router = useRouter();
   const articleId = Number(params.id);
 
-  // Use data directly from import
-  const newsData = data as NewsArticle[];
+  const { data, isLoading } = useGetNews();
 
-  const [article, setArticle] = useState<NewsArticle | null>(null);
-  const [relatedArticles, setRelatedArticles] = useState<NewsArticle[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Stable derived data - only recomputes when data changes
+  const newsData = useMemo(
+    () =>
+      (data ?? []).map((item: any) => ({
+        ...item,
+        featured_image: item.featured_image
+          ? `https://cms.networkeandp.com${item.featured_image}`
+          : null,
+      })),
+    [data],
+  );
 
-  // 
-  useEffect(() => {
-    // Find the article by ID
-    const foundArticle = newsData.find(
-      (item) => item.id === articleId && item.status === "published",
-    );
+  // Derive article and related directly — no useEffect/useState needed
+  const article = useMemo(
+    () =>
+      newsData.find(
+        (item: any) => item.id === articleId && item.status === "published",
+      ) ?? null,
+    [newsData, articleId],
+  );
 
-    if (foundArticle) {
-      setArticle(foundArticle);
+  const relatedArticles = useMemo(() => {
+    if (!article) return [];
+    return newsData
+      .filter(
+        (item: any) =>
+          item.status === "published" &&
+          item.id !== articleId &&
+          item.category === article.category,
+      )
+      .slice(0, 3);
+  }, [newsData, article, articleId]);
 
-      // Get related articles (same category, different ID, max 3)
-      const related = newsData
-        .filter(
-          (item) =>
-            item.status === "published" &&
-            item.id !== articleId &&
-            item.category === foundArticle.category,
-        )
-        .slice(0, 3);
-
-      setRelatedArticles(related);
-    }
-
-    setLoading(false);
-  }, [articleId, newsData]);
-
-  // Format date
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
-  // Calculate reading time (rough estimate: 200 words per minute)
-  const calculateReadingTime = (content: string) => {
-    const words = content.split(/\s+/).length;
-    const minutes = Math.ceil(words / 200);
-    return `${minutes} min read`;
-  };
-
-  // Get image URL with fallback
-  const getImageUrl = (article: NewsArticle) => {
-    return article.featured_image || "/images/placeholder-news.jpg";
-  };
-
-  // Share functionality
-  const handleShare = () => {
+  const handleShare = useCallback(() => {
     if (navigator.share) {
       navigator.share({
         title: article?.title,
@@ -95,27 +90,24 @@ export default function NewsDetail() {
         url: window.location.href,
       });
     } else {
-      // Fallback: copy to clipboard
       navigator.clipboard.writeText(window.location.href);
       alert("Link copied to clipboard!");
     }
-  };
+  }, [article]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="bg-white min-h-screen">
         <Header />
         <div className="container mx-auto px-4 py-30 mb-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-3/4 mb-4"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2 mb-8"></div>
-              <div className="h-96 bg-gray-200 rounded mb-8"></div>
-              <div className="space-y-4">
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-              </div>
+          <div className="max-w-4xl mx-auto animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-3/4 mb-4" />
+            <div className="h-4 bg-gray-200 rounded w-1/2 mb-8" />
+            <div className="h-96 bg-gray-200 rounded mb-8" />
+            <div className="space-y-4">
+              <div className="h-4 bg-gray-200 rounded" />
+              <div className="h-4 bg-gray-200 rounded" />
+              <div className="h-4 bg-gray-200 rounded w-5/6" />
             </div>
           </div>
         </div>
@@ -134,16 +126,16 @@ export default function NewsDetail() {
               Article Not Found
             </h1>
             <p className="text-gray-600 mb-8">
-              The article you`&apos;`re looking for doesn`&apos;`t exist or has
-              been removed.
+              The article you&apos;re looking for doesn&apos;t exist or has been
+              removed.
             </p>
-            <button
-              onClick={() => router.push("/news")}
+            <Link
+              href="/news"
               className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-8 rounded-lg hover:bg-blue-700 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to News
-            </button>
+            </Link>
           </div>
         </div>
         <Footer />
@@ -155,11 +147,9 @@ export default function NewsDetail() {
     <div className="bg-white">
       <Header />
 
-      {/* Article Header */}
       <article className="py-20 mb-20 mt-5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            {/* Back Button */}
             <motion.button
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -170,7 +160,6 @@ export default function NewsDetail() {
               Back to News
             </motion.button>
 
-            {/* Category Badge */}
             {article.category && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -184,7 +173,6 @@ export default function NewsDetail() {
               </motion.div>
             )}
 
-            {/* Title */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -194,7 +182,6 @@ export default function NewsDetail() {
               {article.title}
             </motion.h1>
 
-            {/* Excerpt */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -204,7 +191,6 @@ export default function NewsDetail() {
               {article.excerpt}
             </motion.p>
 
-            {/* Meta Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -234,7 +220,6 @@ export default function NewsDetail() {
               </button>
             </motion.div>
 
-            {/* Featured Image */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -250,7 +235,6 @@ export default function NewsDetail() {
               />
             </motion.div>
 
-            {/* Article Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -259,7 +243,6 @@ export default function NewsDetail() {
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
 
-            {/* Author Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -282,16 +265,15 @@ export default function NewsDetail() {
         </div>
       </article>
 
-      {/* Related Articles */}
       {relatedArticles.length > 0 && (
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-gray-50 mb-28">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold text-gray-900 mb-8">
                 Related Articles
               </h2>
               <div className="grid md:grid-cols-3 gap-8">
-                {relatedArticles.map((relatedArticle, index) => (
+                {relatedArticles.map((relatedArticle: any, index: any) => (
                   <motion.article
                     key={relatedArticle.id}
                     initial={{ opacity: 0, y: 20 }}

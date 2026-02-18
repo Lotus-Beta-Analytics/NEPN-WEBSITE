@@ -1,27 +1,34 @@
+"use client";
+
+import { useGetTestimonials } from "@/hooks/testimonials";
+
 export default function Testimonials() {
+  const {data, isLoading} = useGetTestimonials();
+
+  console.log("jingher", data  )
   const testimonials = [
     {
       quote:
-        'NEPN transformed our business with their innovative solutions. The team is professional and results-driven.',
-      author: 'Sarah Johnson',
-      role: 'CEO, TechCorp',
-      avatar: 'SJ',
+        "NEPN transformed our business with their innovative solutions. The team is professional and results-driven.",
+      author: "Sarah Johnson",
+      role: "CEO, TechCorp",
+      avatar: "SJ",
     },
     {
       quote:
-        'Outstanding service and support. They truly understand our needs and deliver beyond expectations.',
-      author: 'Michael Chen',
-      role: 'Director, InnovateLabs',
-      avatar: 'MC',
+        "Outstanding service and support. They truly understand our needs and deliver beyond expectations.",
+      author: "Michael Chen",
+      role: "Director, InnovateLabs",
+      avatar: "MC",
     },
     {
       quote:
-        'Working with NEPN has been a game-changer. Their expertise and dedication are unmatched.',
-      author: 'Emily Rodriguez',
-      role: 'Founder, StartupHub',
-      avatar: 'ER',
+        "Working with NEPN has been a game-changer. Their expertise and dedication are unmatched.",
+      author: "Emily Rodriguez",
+      role: "Founder, StartupHub",
+      avatar: "ER",
     },
-  ]
+  ];
 
   return (
     <section className="py-20 bg-gray-50">
@@ -70,5 +77,5 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }

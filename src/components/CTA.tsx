@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function CTA() {
   return (
@@ -18,15 +18,9 @@ export default function CTA() {
             >
               Contact Us
             </Link>
-            <Link
-              href="/services"
-              className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-colors duration-200 inline-block"
-            >
-              Our Services
-            </Link>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

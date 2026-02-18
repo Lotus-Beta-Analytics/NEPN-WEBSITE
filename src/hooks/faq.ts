@@ -12,8 +12,8 @@ async function getFAQ() {
       },
     });
 
-    console.log(res?.data.data);
-    return res?.data?.data;
+    console.log(res?.data?.faqs);
+    return res?.data?.faqs;
   } catch (error) {}
 }
 

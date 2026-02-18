@@ -12,8 +12,8 @@ async function getTestimonials() {
       },
     });
 
-    console.log(res?.data?.posts, "boy");
-    return res?.data?.posts;
+    console.log(res?.data?.testimonials, "boy");
+    return res?.data?.testimonials;
   } catch (error) {}
 }
 

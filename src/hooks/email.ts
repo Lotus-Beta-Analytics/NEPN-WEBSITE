@@ -32,7 +32,7 @@ type EmailFormData = any;
 export function useSendEmails() {
   const queryClient = useQueryClient();
 
-  const { mutate, isError, error, isSuccess, reset } = useMutation<
+  const { mutate, isError, error, isSuccess, reset, isPending } = useMutation<
     EmailResponse,
     Error,
     EmailFormData
@@ -45,5 +45,5 @@ export function useSendEmails() {
     },
   });
 
-  return { mutate, isError, error, isSuccess, reset };
+  return { mutate, isError, error, isSuccess, reset, isPending  };
 }

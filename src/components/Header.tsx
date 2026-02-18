@@ -1,22 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { X } from "lucide-react";
-import Link from "next/link";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-
-interface NavigationProps {
-  currentPage: string;
-  onNavigate: (page: string) => void;
-}
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const pathname = usePathname();
-  const router = useRouter();
 
   const menuItems = [
     { id: "/", label: "Home" },
@@ -28,151 +20,227 @@ export default function Header() {
     { id: "/contact", label: "Contact Us" },
   ];
 
-  const handleNavigate = (page: string) => {
-    router.push(page);
+  const closeMenu = () => {
     setIsMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
-    const html = document.documentElement;
-    const body = document.body;
-
-    if (isMenuOpen) {
-      html.style.overflow = "hidden";
-      body.style.overflow = "hidden";
-      body.style.height = "100vh";
-    } else {
-      html.style.overflow = "";
-      body.style.overflow = "";
-      body.style.height = "";
-    }
-
+    document.documentElement.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
-      html.style.overflow = "";
-      body.style.overflow = "";
-      body.style.height = "";
+      document.documentElement.style.overflow = "";
     };
   }, [isMenuOpen]);
 
   return (
     <>
-      {/* Navigation Bar */}
-      <motion.div
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 bg-white h-[70px] sm:h-[84px] z-50 shadow-md overflow-hidden"
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "68px",
+          backgroundColor: "rgba(255,255,255,0.92)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "1px solid #f0f0f0",
+          zIndex: 50,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 32px",
+        }}
       >
-        <div className="container mx-auto px-8 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-          <motion.div whileHover={{ scale: 1.05 }} className="cursor-pointer">
-            <div className="flex-shrink-0">
-              <Link href="/">
-                <Image
-                  src="/images/logo.png"
-                  alt="NEPN Logo"
-                  width={167}
-                  height={56}
-                  className="h-10 sm:h-12 lg:h-14 w-auto"
-                />
-              </Link>
-            </div>
-          </motion.div>
+        <Link href="/" onClick={closeMenu}>
+          <Image
+            src="/images/logo.png"
+            alt="NEPN Logo"
+            width={120}
+            height={40}
+            style={{ height: "36px", width: "auto" }}
+            priority
+          />
+        </Link>
 
-          {/* Menu Button */}
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsMenuOpen(true)}
-            className="size-[40px] sm:size-[48px] flex items-center justify-center"
-            aria-label="Open menu"
-          >
-            <svg
-              className="w-[24px] h-[24px] sm:w-[29px] sm:h-[29px]"
-              fill="none"
-              viewBox="0 0 29 29"
-            >
-              <path
-                d="M3.625 7.25h21.75M3.625 14.5h21.75M3.625 21.75h21.75"
-                stroke="black"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </motion.button>
-        </div>
-      </motion.div>
+        {/* Hamburger */}
+        <button
+          onClick={() => setIsMenuOpen((v) => !v)}
+          aria-label="Toggle menu"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "8px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "6px",
+            alignItems: "flex-end",
+          }}
+        >
+          <motion.span
+            style={{
+              display: "block",
+              height: "3px",
+              backgroundColor: "#111",
+              borderRadius: "2px",
+              // transformOrigin: "center",
+              width: "24px",
+            }}
+          />
+          <motion.span
+            style={{
+              display: "block",
+              height: "3px",
+              backgroundColor: "#111",
+              borderRadius: "2px",
+              width: "24px",
+            }}
+          />
+          <motion.span
+            style={{
+              display: "block",
+              height: "3px",
+              backgroundColor: "#111",
+              borderRadius: "2px",
+              transformOrigin: "center",
+              width: "24px",
+            }}
+          />
+        </button>
+      </motion.header>
 
-      {/* Full Screen Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Backdrop with Blur */}
+            {/* Backdrop */}
             <motion.div
+              key="backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-black/30 backdrop-blur-md  z-[99]"
+              transition={{ duration: 0.2 }}
+              onClick={closeMenu}
+              style={{
+                position: "fixed",
+                inset: 0,
+                backgroundColor: "rgba(0,0,0,0.15)",
+                zIndex: 98,
+              }}
             />
 
-            {/* Menu Panel */}
+            {/* Panel */}
             <motion.div
+              key="panel"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed right-0 top-0 bg-white z-[100] w-full sm:w-[80vw] md:w-[40vw] lg:w-[40vw] h-full flex items-center justify-center sm:justify-end px-6 sm:pr-12 md:pr-16 lg:pr-20 overflow-y-auto"
+              transition={{
+                type: "tween",
+                duration: 0.32,
+                ease: [0.32, 0, 0.08, 1],
+              }}
+              style={{
+                position: "fixed",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                width: "min(380px, 100vw)",
+                backgroundColor: "#fff",
+                zIndex: 99,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                padding: "80px 48px 48px",
+                boxSizing: "border-box",
+                borderLeft: "1px solid #f0f0f0",
+              }}
             >
-              {/* Close Button */}
-              <motion.button
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                whileHover={{ scale: 1.1, rotate: 90 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsMenuOpen(false)}
-                className="absolute top-6 sm:top-8 right-6 sm:right-8 size-10 sm:size-12 flex items-center justify-center"
+              {/* Close */}
+              <button
+                onClick={closeMenu}
                 aria-label="Close menu"
+                style={{
+                  position: "absolute",
+                  top: "22px",
+                  right: "28px",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: "8px",
+                  color: "#111",
+                  lineHeight: 1,
+                  fontSize: "22px",
+                }}
               >
-                <X className="w-6 h-6 sm:w-8 sm:h-8 text-black" />
-              </motion.button>
+                ✕
+              </button>
 
-              {/* Menu Items */}
-              <div className="text-center sm:text-right w-full max-w-lg">
-                {/* <motion.p
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  className="text-xs sm:text-sm text-gray-500 mb-8 sm:mb-12 tracking-wider"
-                >
-                  NAVIGATION MENU
-                </motion.p> */}
-
-                <nav className="space-y-4 sm:space-y-6">
-                  {menuItems.map((item, index) => (
-                    <motion.button
+              {/* Nav Links */}
+              <nav
+                style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+              >
+                {menuItems.map((item, index) => {
+                  const isActive = pathname === item.id;
+                  return (
+                    <motion.div
                       key={item.id}
-                      initial={{ x: 50, opacity: 0 }}
-                      animate={{
-                        x: 0,
-                        opacity: 1,
-                        transition: { delay: index * 0.1 },
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        delay: index * 0.045,
+                        duration: 0.28,
+                        ease: "easeOut",
                       }}
-                      whileHover={{
-                        x: -10,
-                        transition: { duration: 0.2 },
-                      }}
-                      onClick={() => handleNavigate(item.id)}
-                      className={`block px-8 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold transition-colors ${
-                        pathname === item.id
-                          ? "text-[#0000fe]"
-                          : "text-black hover:text-[#0000fe]"
-                      }`}
                     >
-                      {item.label}
-                    </motion.button>
-                  ))}
-                </nav>
-              </div>
+                      <Link
+                        href={item.id}
+                        onClick={closeMenu}
+                        style={{
+                          display: "block",
+                          fontSize: "28px",
+                          fontWeight: isActive ? "700" : "400",
+                          color: isActive ? "#0000fe" : "#111",
+                          textDecoration: "none",
+                          padding: "10px 0",
+                          borderBottom: "1px solid #f5f5f5",
+                          transition: "color 0.15s ease",
+                          letterSpacing: "-0.02em",
+                          lineHeight: 1.2,
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isActive)
+                            (e.currentTarget as HTMLAnchorElement).style.color =
+                              "#0000fe";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isActive)
+                            (e.currentTarget as HTMLAnchorElement).style.color =
+                              "#111";
+                        }}
+                      >
+                        {item.label}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              {/* Footer note */}
+              <p
+                style={{
+                  marginTop: "40px",
+                  fontSize: "11px",
+                  color: "#bbb",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {/* NEPN © {new Date().getFullYear()} */}
+              </p>
             </motion.div>
           </>
         )}
