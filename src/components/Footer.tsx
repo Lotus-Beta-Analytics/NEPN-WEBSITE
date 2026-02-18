@@ -33,7 +33,7 @@ export default function Footer() {
       onSuccess: () => {
         setFormData({ email: "" });
 
-        console.log("Form cleared successfully!");
+        // console.log("Form cleared successfully!");
       },
       onError: (error) => {
         console.error("Keep the data, something went wrong:", error);

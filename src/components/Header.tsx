@@ -184,7 +184,12 @@ export default function Header() {
                 style={{ display: "flex", flexDirection: "column", gap: "4px" }}
               >
                 {menuItems.map((item, index) => {
-                  const isActive = pathname === item.id;
+                  // const isActive = pathname === item.id;
+                  const isActive =
+                    item.id === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(item.id);
+
                   return (
                     <motion.div
                       key={item.id}
