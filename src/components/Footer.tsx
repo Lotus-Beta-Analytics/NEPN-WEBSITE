@@ -16,6 +16,8 @@ export default function Footer() {
     // username: '',
     email: "",
   });
+  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -32,8 +34,7 @@ export default function Footer() {
     sendEmail(formData, {
       onSuccess: () => {
         setFormData({ email: "" });
-
-        // console.log("Form cleared successfully!");
+        setSubmitted(true); //
       },
       onError: (error) => {
         console.error("Keep the data, something went wrong:", error);
@@ -52,8 +53,8 @@ export default function Footer() {
           <path
             fill="#111827"
             fillOpacity="1"
-            d="M0,128L80,106.7C160,85,320,43,480,53.3C640,64,800,128,960,138.7C1120,149,1280,107,1360,85.3L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-          ></path>
+            d="M0,80 C360,180 1080,0 1440,100 L1440,320 L0,320 Z"
+          />
         </svg>
       </div>
 
@@ -214,49 +215,68 @@ export default function Footer() {
                 Subscribe to our Newsletter & Event right now to be updated.
               </p>
               <div className="flex gap-2">
-                <input
-                  type="email"
-                  value={formData.email}
-                  name="email"
-                  placeholder="Email"
-                  className="flex-1 bg-transparent border border-white/60 rounded-[5px] px-4 py-2.5 text-white placeholder:text-white/60 focus:outline-none focus:border-white transition-colors"
-                  onChange={handleChange}
-                />
-                <button
-                  onClick={handleSubmit}
-                  disabled={isPending}
-                  className={`${isPending ? "bg-gray-200" : "bg-blue-700"} hover:bg-blue-700 p-3 rounded-[5px] transition-colors`}
-                >
-                  {isPending ? (
+                {submitted ? (
+                  <p className="text-green-400 text-[15px] flex items-center gap-2">
                     <svg
-                      className="animate-spin"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
+                      className="w-4 h-4 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
                     >
-                      <circle
-                        cx="8"
-                        cy="8"
-                        r="6"
-                        stroke="#3b82f6"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeDasharray="28"
-                        strokeDashoffset="10"
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
                       />
                     </svg>
-                  ) : (
-                    <svg
-                      width="16"
-                      height="15"
-                      viewBox="0 0 16 15"
-                      fill="white"
+                    You&apos;re subscribed! Thanks for joining.
+                  </p>
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      type="email"
+                      value={formData.email}
+                      name="email"
+                      placeholder="Email"
+                      className="flex-1 bg-transparent border border-white/60 rounded-[5px] px-4 py-2.5 text-white placeholder:text-white/60 focus:outline-none focus:border-white transition-colors"
+                      onChange={handleChange}
+                    />
+                    <button
+                      onClick={handleSubmit}
+                      disabled={isPending}
+                      className={`${isPending ? "bg-gray-200" : "bg-blue-700"} hover:bg-blue-700 p-3 rounded-[5px] transition-colors`}
                     >
-                      <path d="M0 7.5L16 0L8 15L7 7.5H0Z" />
-                    </svg>
-                  )}
-                </button>
+                      {isPending ? (
+                        <svg
+                          className="animate-spin"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                        >
+                          <circle
+                            cx="8"
+                            cy="8"
+                            r="6"
+                            stroke="#3b82f6"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeDasharray="28"
+                            strokeDashoffset="10"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          width="16"
+                          height="15"
+                          viewBox="0 0 16 15"
+                          fill="white"
+                        >
+                          <path d="M0 7.5L16 0L8 15L7 7.5H0Z" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 

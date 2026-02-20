@@ -45,6 +45,7 @@ export default function News() {
   const { data } = useGetNews();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [submitted, setSubmitted] = useState(false);
 
   const [formData, setFormData] = useState<FormData>({
     // username: '',
@@ -66,6 +67,7 @@ export default function News() {
     sendEmail(formData, {
       onSuccess: () => {
         setFormData({ email: "" });
+        setSubmitted(true);
 
         console.log("Form cleared successfully!");
       },
@@ -123,7 +125,6 @@ export default function News() {
   return (
     <div className="bg-white">
       <Header />
-
       {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -355,49 +356,66 @@ export default function News() {
               Subscribe to our newsletter and get the latest news delivered
               directly to your inbox
             </p>
-            <div className="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                placeholder="Enter your email address"
-                className="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none"
-                onChange={handleChange}
-              />
-              <motion.button
-                whileHover={{ scale: isPending ? 1 : 1.05 }}
-                whileTap={{ scale: isPending ? 1 : 0.95 }}
-                disabled={isPending}
-                className="bg-[#fe0000] text-white px-8 py-4 rounded-lg font-semibold whitespace-nowrap flex items-center gap-2 disabled:opacity-70"
-                onClick={handleSubmit}
-              >
-                {isPending ? (
-                  <>
-                    <svg
-                      className="animate-spin"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                    >
-                      <circle
-                        cx="8"
-                        cy="8"
-                        r="6"
-                        stroke="white"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeDasharray="28"
-                        strokeDashoffset="10"
-                      />
-                    </svg>
-                    Subscribing...
-                  </>
-                ) : (
-                  "Subscribe"
-                )}
-              </motion.button>
-            </div>
+            {submitted ? (
+              <p className="text-white flex items-center justify-center gap-2 text-lg font-medium">
+                <svg
+                  className="w-5 h-5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                You&apos;re subscribed! Thanks for joining.
+              </p>
+            ) : (
+              <div className="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  placeholder="Enter your email address"
+                  className="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none"
+                  onChange={handleChange}
+                />
+                <motion.button
+                  whileHover={{ scale: isPending ? 1 : 1.05 }}
+                  whileTap={{ scale: isPending ? 1 : 0.95 }}
+                  disabled={isPending}
+                  className="bg-[#fe0000] text-white px-8 py-4 rounded-lg font-semibold whitespace-nowrap flex items-center gap-2 disabled:opacity-70"
+                  onClick={handleSubmit}
+                >
+                  {isPending ? (
+                    <>
+                      <svg
+                        className="animate-spin"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                      >
+                        <circle
+                          cx="8"
+                          cy="8"
+                          r="6"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeDasharray="28"
+                          strokeDashoffset="10"
+                        />
+                      </svg>
+                      Subscribing...
+                    </>
+                  ) : (
+                    "Subscribe"
+                  )}
+                </motion.button>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>

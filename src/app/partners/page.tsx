@@ -226,7 +226,7 @@ export default function PartnersPage() {
       </section>
 
       {/* Partnership Benefits */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 px-8">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -268,7 +268,7 @@ export default function PartnersPage() {
       </section>
 
       {/* Partner Logos */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-12">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -304,7 +304,7 @@ export default function PartnersPage() {
       </section>
 
       {/* Success Stories */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 px-12">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}

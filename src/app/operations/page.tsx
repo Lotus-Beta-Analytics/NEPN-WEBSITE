@@ -135,7 +135,7 @@ export default function Operations() {
       </motion.section>
 
       {/* Overview Section */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-12">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -178,7 +178,7 @@ export default function Operations() {
       </section>
 
       {/* Operational Areas */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 px-8">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -239,7 +239,7 @@ export default function Operations() {
       </section>
 
       {/* Capabilities Section */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-8">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -287,7 +287,7 @@ export default function Operations() {
       </section>
 
       {/* Technology Section */}
-      <section className="py-20 bg-[#00005A] text-white">
+      <section className="py-20 bg-[#00005A] text-white px-12">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -321,7 +321,7 @@ export default function Operations() {
       </section>
 
       {/* Safety & Compliance */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ x: -50, opacity: 0 }}
@@ -396,7 +396,7 @@ export default function Operations() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#0000fe] to-[#4d4df9] text-white mb-64">
+      <section className="py-20 bg-gradient-to-br from-[#0000fe] to-[#4d4df9] text-white mb-64 px-12">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}

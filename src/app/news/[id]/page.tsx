@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export interface NewsArticle {
   id: number;
@@ -46,10 +46,10 @@ export default function NewsDetail() {
   const params = useParams();
   const router = useRouter();
   const articleId = Number(params.id);
+  const [copied, setCopied] = useState(false);
 
   const { data, isLoading } = useGetNews();
 
-  // Stable derived data - only recomputes when data changes
   const newsData = useMemo(
     () =>
       (data ?? []).map((item: any) => ({
@@ -61,7 +61,6 @@ export default function NewsDetail() {
     [data],
   );
 
-  // Derive article and related directly — no useEffect/useState needed
   const article = useMemo(
     () =>
       newsData.find(
@@ -83,15 +82,34 @@ export default function NewsDetail() {
   }, [newsData, article, articleId]);
 
   const handleShare = useCallback(() => {
-    if (navigator.share) {
-      navigator.share({
-        title: article?.title,
-        text: article?.excerpt,
-        url: window.location.href,
-      });
+    if (navigator.share && navigator.canShare?.()) {
+      navigator
+        .share({
+          title: article?.title,
+          text: article?.excerpt,
+          url: window.location.href,
+        })
+        .catch(() => {}); // user cancelled
     } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert("Link copied to clipboard!");
+      // Fallback that works everywhere including Chrome desktop
+      try {
+        const textArea = document.createElement("textarea");
+        textArea.value = window.location.href;
+        textArea.style.cssText = "position:fixed;left:-9999px;top:-9999px;";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        // Last resort if even that fails
+        navigator.clipboard?.writeText(window.location.href).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        });
+      }
     }
   }, [article]);
 
@@ -215,8 +233,27 @@ export default function NewsDetail() {
                 onClick={handleShare}
                 className="ml-auto flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors"
               >
-                <Share2 className="w-5 h-5" />
-                Share
+                {copied ? (
+                  <>
+                    <svg
+                      className="w-5 h-5 text-green-500"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span className="text-green-500">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="w-5 h-5" />
+                    Share
+                  </>
+                )}
               </button>
             </motion.div>
 

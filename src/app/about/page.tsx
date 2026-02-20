@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "motion/react";
-import { Target, Eye, Award, TrendingUp, Users, Building } from "lucide-react";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { Award, Building, Eye, Target, TrendingUp, Users } from "lucide-react";
+import { motion } from "motion/react";
 // import { useRouter } from "next/navigation";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function About() {
   const values = [
@@ -122,13 +122,13 @@ export default function About() {
       </section>
 
       {/* What We Do Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 px-8">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-16 px-4"
           >
             <h2 className="text-4xl font-bold mb-4 text-black">What We Do</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -189,7 +189,7 @@ export default function About() {
       </section>
 
       {/* Sustainable Growth Section */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ x: -50, opacity: 0 }}
@@ -249,7 +249,7 @@ export default function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 px-8">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -288,7 +288,7 @@ export default function About() {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-4 px-8">
         <div className="grid md:grid-cols-2 gap-12">
           <motion.div
             initial={{ x: -50, opacity: 0 }}

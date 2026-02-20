@@ -1,5 +1,5 @@
 // import { queryKeys } from "../react-query/constants";
-import { queryKeys } from "@/app/react-query/constant";
+import { queryKeys } from "@/react-query/constant";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "../axios-instance";
 
@@ -45,5 +45,5 @@ export function useSendEmails() {
     },
   });
 
-  return { mutate, isError, error, isSuccess, reset, isPending  };
+  return { mutate, isError, error, isSuccess, reset, isPending };
 }

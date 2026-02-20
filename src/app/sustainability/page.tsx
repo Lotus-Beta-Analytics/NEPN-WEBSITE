@@ -108,7 +108,7 @@ export default function Sustainability() {
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative h-[60vh] overflow-hidden bg-gradient-to-br from-green-700 to-green-900"
+        className="relative h-[60vh] overflow-hidden bg-gradient-to-br from-green-700 to-green-900 px-8"
       >
         <div
           className="absolute inset-0 opacity-20"
@@ -143,7 +143,7 @@ export default function Sustainability() {
       </motion.section>
 
       {/* Main Sustainability Statement */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-8 ">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -175,8 +175,8 @@ export default function Sustainability() {
       </section>
 
       {/* EHS Excellence Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gray-50 px-8">
+        <div className="container mx-auto">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -252,7 +252,7 @@ export default function Sustainability() {
       </section>
 
       {/* Sustainable Practices Section */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-8">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -340,7 +340,7 @@ export default function Sustainability() {
       </section>
 
       {/* Roadmap Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 px-8">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}

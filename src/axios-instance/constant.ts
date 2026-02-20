@@ -1,1 +1,1 @@
-export const BASE_URL = "https://cms.networkeandp.com/php/api.php?path=";
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;

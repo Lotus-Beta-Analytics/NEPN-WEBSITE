@@ -15,6 +15,7 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const { mutate, isPending } = useSendContact();
 
@@ -30,8 +31,9 @@ export default function ContactPage() {
           subject: "",
           message: "",
         });
+        setSubmitted(true);
 
-        console.log("Form cleared successfully!");
+        // console.log("Form cleared successfully!");
       },
       onError: (error) => {
         console.error("Keep the data, something went wrong:", error);
@@ -132,7 +134,7 @@ export default function ContactPage() {
       </motion.section>
 
       {/* Contact Information Cards */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {contactInfo.map((info, index) => (
             <motion.div
@@ -161,7 +163,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form & Map */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 px-8">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -178,125 +180,158 @@ export default function ContactPage() {
                 24 hours.
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6 text-black">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 text-green-500"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-black">
+                    Message Sent!
+                  </h3>
+                  <p className="text-gray-600 max-w-sm">
+                    Thanks for reaching out. Our team will get back to you
+                    within 24 hours.
+                  </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="mt-2 text-[#0000fe] text-sm font-semibold hover:underline"
+                  >
+                    Send another message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6 text-black">
+                    <div>
+                      <label className="block text-black text-sm font-semibold mb-2">
+                        Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm text-black font-semibold mb-2">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm text-black font-semibold mb-2">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3  text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
+                        placeholder="+234 123 456 7890"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm text-black font-semibold mb-2">
+                        Company/Organization
+                      </label>
+                      <input
+                        type="text"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
+                        placeholder="Company Name"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm text-black font-semibold mb-2">
+                      Subject *
+                    </label>
+                    <select
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border text-black border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="partnership">
+                        Partnership Opportunity
+                      </option>
+                      <option value="career">Career Information</option>
+                      <option value="media">Media & Press</option>
+                      <option value="supplier">Supplier Registration</option>
+                      <option value="complaint">Complaint/Feedback</option>
+                      <option value="complaint">Schedule a visit</option>
+                    </select>
+                  </div>
+
                   <div>
                     <label className="block text-black text-sm font-semibold mb-2">
-                      Full Name *
+                      Message *
                     </label>
-                    <input
-                      type="text"
-                      name="name"
+                    <textarea
+                      name="message"
                       required
-                      value={formData.name}
+                      value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
-                      placeholder="John Doe"
+                      rows={6}
+                      className="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors resize-none"
+                      placeholder="Tell us how we can help you..."
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm text-black font-semibold mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm text-black font-semibold mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3  text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
-                      placeholder="+234 123 456 7890"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm text-black font-semibold mb-2">
-                      Company/Organization
-                    </label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
-                      placeholder="Company Name"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm text-black font-semibold mb-2">
-                    Subject *
-                  </label>
-                  <select
-                    name="subject"
-                    required
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border text-black border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors"
-                  >
-                    <option value="">Select a subject</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="partnership">Partnership Opportunity</option>
-                    <option value="career">Career Information</option>
-                    <option value="media">Media & Press</option>
-                    <option value="supplier">Supplier Registration</option>
-                    <option value="complaint">Complaint/Feedback</option>
-                    <option value="complaint">Schedule a visit</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-black text-sm font-semibold mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={6}
-                    className="w-full px-4 py-3 text-black rounded-lg border border-gray-300 focus:border-[#0000fe] focus:outline-none transition-colors resize-none"
-                    placeholder="Tell us how we can help you..."
-                  />
-                </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  disabled={isPending}
-                  className={`w-full px-8 py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors text-white 
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    type="submit"
+                    disabled={isPending}
+                    className={`w-full px-8 py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors text-white 
     ${
       isPending
         ? "bg-gray-400 cursor-not-allowed" // Grayed out state
         : "bg-[#0000fe] hover:bg-[#0000cc] cursor-pointer" // Active state
     }`}
-                >
-                  {isPending ? (
-                    <>
-                      <span className="animate-spin">⏳</span> Sending...
-                    </>
-                  ) : (
-                    "Send Message"
-                  )}
-                </motion.button>
-              </form>
+                  >
+                    {isPending ? (
+                      <>
+                        <span className="animate-spin">⏳</span> Sending...
+                      </>
+                    ) : (
+                      "Send Message"
+                    )}
+                  </motion.button>
+                </form>
+              )}
             </motion.div>
 
             {/* Map */}
@@ -359,7 +394,7 @@ export default function ContactPage() {
       </section>
 
       {/* Other Offices */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-8">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -406,7 +441,7 @@ export default function ContactPage() {
       </section>
 
       {/* Emergency Contact */}
-      <section className="py-20 bg-[#fe0000] text-white mb-48">
+      <section className="py-20 bg-[#fe0000] text-white mb-64 px-8">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
