@@ -12,6 +12,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "NEPN Website",
   description: "NEPN Website built with Next.js and Tailwind CSS",
+  icons: {
+    icon: "icons/logo-footer.ico",
+  },
 };
 
 export default function RootLayout({
