@@ -11,9 +11,10 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "NEPN Website",
-  description: "NEPN Website built with Next.js and Tailwind CSS",
+  description:
+    "Discover NEPN's innovative solutions, services, and commitment to sustainability. Learn about our operations, partnerships, and impact.",
   icons: {
-    icon: "icons/logo-footer.ico",
+    icon: "/icons/logo-footer.ico",
   },
 };
 

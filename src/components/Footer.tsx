@@ -17,7 +17,6 @@ export default function Footer() {
     email: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  // const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -231,19 +230,19 @@ export default function Footer() {
                     You&apos;re subscribed! Thanks for joining.
                   </p>
                 ) : (
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 w-3/4">
                     <input
                       type="email"
                       value={formData.email}
                       name="email"
                       placeholder="Email"
-                      className="flex-1 bg-transparent border border-white/60 rounded-[5px] px-4 py-2.5 text-white placeholder:text-white/60 focus:outline-none focus:border-white transition-colors"
+                      className="flex-1 bg-transparent border border-white/60 rounded-[5px] px-5 py-3 text-white placeholder:text-white/60 focus:outline-none focus:border-white transition-colors"
                       onChange={handleChange}
                     />
                     <button
                       onClick={handleSubmit}
                       disabled={isPending}
-                      className={`${isPending ? "bg-gray-200" : "bg-blue-700"} hover:bg-blue-700 p-3 rounded-[5px] transition-colors`}
+                      className={`${isPending ? "bg-gray-200" : "bg-blue-700"} hover:bg-blue-700 px-5 py-3 rounded-[5px] transition-colors whitespace-nowrap`}
                     >
                       {isPending ? (
                         <svg

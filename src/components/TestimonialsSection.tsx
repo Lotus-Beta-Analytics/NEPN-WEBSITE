@@ -1,11 +1,10 @@
 "use client";
 
 import { useGetTestimonials } from "@/hooks/testimonials";
-import { motion, useInView } from "motion/react";
+import { AnimatePresence, motion, useInView } from "motion/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-// Fallback testimonials in case API fails
 const fallbackTestimonials = [
   {
     quote:
@@ -45,13 +44,15 @@ const fallbackTestimonials = [
   },
 ];
 
+const ITEMS_PER_PAGE = 2;
+
 export default function TestimonialsSection() {
   const { data: apiTestimonials } = useGetTestimonials();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
-  // Transform API data to match component structure
   const testimonials = apiTestimonials?.length
     ? apiTestimonials.map((item: any) => ({
         quote: item.description,
@@ -62,120 +63,167 @@ export default function TestimonialsSection() {
       }))
     : fallbackTestimonials;
 
-  // Auto switch every 5 seconds
+  const totalSlides = Math.ceil(testimonials.length / ITEMS_PER_PAGE);
+
+  // Normalise index → always a valid slide start (0, 2, 4 …)
+  const activeSlide = Math.floor(currentIndex / ITEMS_PER_PAGE) % totalSlides;
+
+  const visibleTestimonials = [
+    testimonials[currentIndex % testimonials.length],
+    testimonials[(currentIndex + 1) % testimonials.length],
+  ];
+
+  // Auto-advance: increment by ITEMS_PER_PAGE, keep in bounds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 2) % testimonials.length);
+      setDirection(1);
+      setCurrentIndex((prev) => {
+        const next = prev + ITEMS_PER_PAGE;
+        return next >= testimonials.length ? 0 : next;
+      });
     }, 5000);
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
-  // Get the two testimonials to show
-  const visibleTestimonials = [
-    testimonials[currentIndex],
-    testimonials[(currentIndex + 1) % testimonials.length],
-  ];
-
-  // Calculate total number of testimonials for stats
-  const totalTestimonials = testimonials.length;
+  const goToSlide = (slideIndex: number) => {
+    const nextIndex = slideIndex * ITEMS_PER_PAGE;
+    setDirection(nextIndex > currentIndex ? 1 : -1);
+    setCurrentIndex(nextIndex);
+  };
 
   return (
     <section ref={ref} className="relative bg-gray-50 px-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:flex lg:gap-8 items-start">
-          {/* Left Column: Header + Dots + Carousel */}
-          <div className="lg:flex-1 flex flex-col gap-8 pt-8">
-            {/* Header + Pagination */}
-            <div className="flex flex-col items-start gap-4">
-              <div className="py-3 relative z-10">
-                <span className="relative text-gray-700 text-xl lg:text-2xl font-semibold">
-                  <span className="relative z-10">Wh</span>
-                  <span className="relative z-10">
-                    at our people and partner say
-                  </span>
-
-                  {/* small circle behind Wh */}
-                  <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#3d3d3d0a] z-0"></span>
-                </span>
+          {/* ── LEFT COLUMN ── */}
+          <div className="lg:flex-1 flex flex-col gap-10 pt-8">
+            {/* Header */}
+            <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-1">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#fe0000]">
+                  Testimonials
+                </p>
+                <h2 className="text-gray-900 text-2xl lg:text-[28px] font-semibold leading-snug">
+                  What our people &amp; partners say
+                </h2>
               </div>
 
+              {/* Pagination dots — keyed on activeSlide so they always reflect current position */}
               <div className="flex items-center gap-2">
-                {Array.from({ length: Math.ceil(testimonials.length / 2) }).map(
-                  (_, slideIndex) => (
+                {Array.from({ length: totalSlides }).map((_, slideIndex) => {
+                  const isActive = activeSlide === slideIndex;
+                  return (
                     <button
                       key={slideIndex}
-                      onClick={() => setCurrentIndex(slideIndex * 2)}
-                      className={`w-3 h-3 rounded-full transition-all ${
-                        currentIndex === slideIndex * 2
-                          ? "bg-nepn-red w-8"
-                          : "bg-gray-300"
-                      }`}
+                      onClick={() => goToSlide(slideIndex)}
                       aria-label={`Go to testimonial slide ${slideIndex + 1}`}
+                      style={{
+                        width: isActive ? 28 : 8,
+                        height: 8,
+                        borderRadius: 9999,
+                        background: isActive ? "#fe0000" : "#d1d5db",
+                        border: "none",
+                        padding: 0,
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                      }}
                     />
-                  ),
-                )}
+                  );
+                })}
               </div>
             </div>
 
             {/* Carousel */}
-            <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-              {visibleTestimonials.map((testimonial, index) => (
-                <motion.div
-                  key={`${currentIndex}-${index}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-[10px] p-8 shadow-md flex flex-col justify-between"
-                >
-                  {/* Quote Icon */}
-                  <div className="mb-6">
-                    <svg
-                      width="86"
-                      height="86"
-                      viewBox="0 0 63 50"
-                      fill="#fe0000"
-                    >
-                      <path d="M0 25C0 11.2 11.2 0 25 0V12.5C18.1 12.5 12.5 18.1 12.5 25H25V50H0V25ZM38 25C38 11.2 49.2 0 63 0V12.5C56.1 12.5 50.5 18.1 50.5 25H63V50H38V25Z" />
-                    </svg>
-                  </div>
-
-                  <p className="text-[15px] text-black italic font-light leading-relaxed mb-8">
-                    {testimonial.quote}
-                  </p>
-
-                  <div className="flex items-center gap-4 mt-auto">
-                    {testimonial.image && (
-                      <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                        <Image
-                          src={testimonial.image || ""}
-                          alt={testimonial.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-                    <div>
-                      <p className="text-[15px] font-medium text-black">
-                        {testimonial.name}
-                      </p>
-                      <p className="text-[13px] text-black/70 italic font-light">
-                        {testimonial.role}
-                      </p>
-                      {testimonial.company && (
-                        <p className="text-[12px] text-black/50">
-                          {testimonial.company}
-                        </p>
-                      )}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: direction * 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction * -30 }}
+                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="grid md:grid-cols-2 gap-5 lg:gap-6"
+              >
+                {visibleTestimonials.map((testimonial, index) => (
+                  <motion.div
+                    key={`${currentIndex}-${index}`}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="bg-white rounded-xl p-7 flex flex-col"
+                    style={{
+                      boxShadow:
+                        "0 1px 2px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.07)",
+                      border: "1px solid #f1f1f1",
+                    }}
+                  >
+                    {/* Quote icon */}
+                    <div className="mb-5">
+                      <svg
+                        width="32"
+                        height="24"
+                        viewBox="0 0 63 50"
+                        fill="#fe0000"
+                        aria-hidden="true"
+                      >
+                        <path d="M0 25C0 11.2 11.2 0 25 0V12.5C18.1 12.5 12.5 18.1 12.5 25H25V50H0V25ZM38 25C38 11.2 49.2 0 63 0V12.5C56.1 12.5 50.5 18.1 50.5 25H63V50H38V25Z" />
+                      </svg>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+
+                    {/* Quote text */}
+                    <p className="text-gray-600 text-[14.5px] italic leading-[1.8] mb-7 flex-1">
+                      {testimonial.quote}
+                    </p>
+
+                    {/* Divider */}
+                    <div className="mb-5 h-px bg-gray-100" />
+
+                    {/* Author */}
+                    <div className="flex items-center gap-3.5">
+                      {testimonial.image ? (
+                        <div
+                          className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0"
+                          style={{ border: "2px solid #f3f3f3" }}
+                        >
+                          <Image
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div
+                          className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 text-white text-sm font-semibold"
+                          style={{ background: "#fe0000" }}
+                        >
+                          {testimonial.name?.charAt(0) ?? "?"}
+                        </div>
+                      )}
+
+                      <div className="min-w-0">
+                        <p className="text-[14px] font-semibold text-gray-900 leading-tight truncate">
+                          {testimonial.name}
+                        </p>
+                        {testimonial.role && (
+                          <p className="text-[12.5px] text-gray-400 italic font-light mt-0.5 truncate">
+                            {testimonial.role}
+                          </p>
+                        )}
+                        {testimonial.company && (
+                          <p className="text-[11px] font-medium text-[#fe0000] uppercase tracking-wide mt-1 truncate">
+                            {testimonial.company}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          {/* Right Column: Stats Card with Flag Drop Animation */}
+          {/* ── RIGHT COLUMN (untouched) ── */}
           <div className="hidden lg:block relative mt-8 lg:mt-0 h-[620px] lg:w-[300px]">
-            {/* Stats Card (Flag) */}
             <motion.div
               initial={{ y: -650, opacity: 0 }}
               animate={
@@ -190,7 +238,6 @@ export default function TestimonialsSection() {
               }}
               className="w-full bg-nepn-red h-[620px] border-2 border-y-500 text-center shadow-xl text-white flex flex-col justify-between py-4 relative"
             >
-              {/* Subtle wave effect */}
               <motion.div
                 initial={{ scaleX: 1 }}
                 animate={
@@ -201,11 +248,7 @@ export default function TestimonialsSection() {
                       }
                     : {}
                 }
-                transition={{
-                  duration: 2,
-                  delay: 1.2,
-                  ease: "easeInOut",
-                }}
+                transition={{ duration: 2, delay: 1.2, ease: "easeInOut" }}
                 className="absolute inset-0"
               />
 
@@ -241,7 +284,7 @@ export default function TestimonialsSection() {
                   transition={{ delay: 1.3, duration: 0.5 }}
                 >
                   <div className="text-5xl lg:text-6xl font-semibold mb-2">
-                    {totalTestimonials}+
+                    {testimonials.length}+
                   </div>
                 </motion.div>
               </div>

@@ -17,7 +17,7 @@ import { useGetNews } from "@/hooks/news";
 export default function Home() {
   const { data } = useGetNews();
 
- const news = (data ?? []).map((item: any) => ({
+  const news = (data ?? []).map((item: any) => ({
     ...item,
     featured_image: item.featured_image
       ? `https://cms.networkeandp.com${item.featured_image}`
